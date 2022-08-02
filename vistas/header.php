@@ -18,8 +18,7 @@
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="../public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="../public/plugins/icheck-bootstrap/
-    icheck-bootstrap.min.css">
+   
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Theme style -->
@@ -145,7 +144,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
+              <a href="gastos.php" class="nav-link">
                 <i class="far fa fa-credit-card nav-icon"></i>
                 <p>Gastos</p>
               </a>
@@ -169,13 +168,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
+              <a href="usuarios.php" class="nav-link">
                 <i class="far fa fa-users nav-icon"></i>
                 <p>Usuarios</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
+              <a href="permiso.php" class="nav-link">
                 <i class="far fas fa-check-circle nav-icon"></i>
                 <p>Permisos</p>
               </a>
@@ -199,13 +198,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
+              <a href="depositos.php" class="nav-link">
                 <i class="far fas fa-money-bill nav-icon"></i>
                 <p>Depósitos</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
+              <a href="gastos.php" class="nav-link">
                 <i class="far fas fa-credit-card nav-icon"></i>
                 <p>Gastos</p>
               </a>

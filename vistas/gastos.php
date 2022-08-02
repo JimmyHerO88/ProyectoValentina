@@ -41,13 +41,12 @@
                           </tfoot>
                         </table>
                     </div>
+                    <!-- general form elements -->
                     <?php
 
                       require 'forms/form_gastos.php';
 
                     ?>
-
-
                   <!--Fin centro -->
                   </div><!-- /.box -->
               </div><!-- /.col -->

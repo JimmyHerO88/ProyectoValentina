@@ -10,7 +10,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form>
+                    <form name="formulario" id="formulario" method="POST">
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="input-group ">
@@ -29,8 +29,8 @@
                             <div class="form-group">
                                 <label>Tpo de gasto</label>
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    <select class="form-control select2 select2-warning" data-dropdown-css-class="select2-warning" style="width: 100%;" name="tipo">
+                                    <span class="input-group-text"><i class="fas fa-share-square"></i></span>
+                                    <select id="tipo" name="tipo" class="form-control seleckpicker" data-dropdown-css-class="select2-warning" style="width: 100%;" >
                                         <option value="TIENDA" selected>Tienda</option>
                                         <option value="PERSONAL">Personal</option>
                                     </select>
@@ -41,7 +41,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
                                     </div>
-                                    <input type="text" name="concepto" id="concepto" class="form-control input-lg" placeholder="Concepto">
+                                    <input type="text" name="concepto" id="concepto" class="form-control input-lg" onkeyup="mayus(this);" maxlendth="120" placeholder="Concepto" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -49,7 +49,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                     </div>
-                                    <input type="number" class="form-control input-lg">
+                                    <input type="number" step="any" class="form-control input-lg" name="importe" id="importe" maxlendth="120" placeholder="Importe" required>
                                 </div>
                             </div>
                             <div class="card-footer">

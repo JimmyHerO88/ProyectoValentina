@@ -109,7 +109,13 @@ function guardaryeditar(e){
         processData: false,
 
         success: function(datos){
-            bootbox.alert(datos);
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -128,14 +134,14 @@ function mostrar(idgasto){
         data = JSON.parse(data);
         mostrarform(true);
 
+        console.log(data);
+
         $("#idgasto").val(data.idgasto);
+        $("#concepto").val(data.concepto);
+        $("#fecha").val(data.fecha);
+        $("#importe").val(data.importe);
         $("#tipo").val(data.tipo);
         $("#tipo").selectpicker('refresh');
-        $("#fecha").val(data.fecha);
-        $("#concepto").val(data.concepto);
-        $("#importe").val(data.importe);
-        $("#idusuario").val(data.idusuario);
-        $("#idsucursal").val(data.idsucursal);
 
     })
 }
@@ -143,20 +149,29 @@ function mostrar(idgasto){
 //FUNCION DESACTIVAR
 function eliminar(idgasto){
 
-    bootbox.confirm("¿Está seguro de eliminar este gasto?",function(result){
-      
-        if(result){
-
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
             $.post("../ajax/gasto.ajax.php?op=eliminar", {idgasto : idgasto}, function(e){
 
-                bootbox.alert(e);
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
                 tabla.ajax.reload();
 
             });
-
+          
         }
-
-    })
+      })
 
 }
 

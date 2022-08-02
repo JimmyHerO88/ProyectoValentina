@@ -16,12 +16,13 @@ switch ($_GET["op"]){
 
         if(empty($idgasto)){
 
-            $rspta = $gasto->insertar($tipo, $concepto, $importe, $fecha);
-            echo $rspta ? "El gasto se ha guardado correctamente" : "El gasto no se pudo guardar";
+            $rspta = $gasto->insertar($fecha, $concepto, $tipo,  $importe);
+
+            echo $rspta ? "El registro se ha guardado correctamente" : "El registro no se pudo guardar";
 
         }else{
 
-            $rspta = $gasto->editar($idgasto, $tipo, $concepto, $importe, $fecha);
+            $rspta = $gasto->editar($idgasto, $fecha, $concepto, $tipo, $importe);
             echo $rspta ? "El gasto se ha modificado correctamente" : "El gasto no se pudo modificar";
 
         }
@@ -45,7 +46,8 @@ switch ($_GET["op"]){
         while ($reg=$rspta->fetch_object()){
             $data[] = array(
                             "0" =>'<a href="vale.php?idgasto='.$reg->idgasto.'"><button class="btn btn-primary btn-sm"><i class="fa fa-print" aria-hidden="true"></i></button></a>
-                            <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idgasto.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
+                            <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idgasto.')"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            <button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idgasto.')"><i class="fas fa-edit"></i></button>',
                             "1" => $reg->fecha,
                             "2" => $reg->concepto,
                             "3" => $reg->tipo,
