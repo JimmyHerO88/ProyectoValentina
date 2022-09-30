@@ -168,7 +168,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="usuarios.php" class="nav-link">
+              <a href="usuario.php" class="nav-link">
                 <i class="far fa fa-users nav-icon"></i>
                 <p>Usuarios</p>
               </a>
