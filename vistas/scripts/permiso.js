@@ -1,4 +1,4 @@
-var tabla;
+let tabla;
 
 //Funcion que se ejecuta al inicio
 function init(){
@@ -18,7 +18,8 @@ function listar(){
                     'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
-                    'pdf'
+                    'pdf',
+                    'print'
                 ],
         "ajax":
                 {

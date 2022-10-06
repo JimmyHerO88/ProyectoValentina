@@ -73,7 +73,8 @@ function listar(){
                     'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
-                    'pdf'
+                    'pdf',
+                    'print'
                 ],
         "ajax":
                 {
@@ -141,8 +142,6 @@ function mostrar(idgasto){
         $("#fecha").val(data.fecha);
         $("#importe").val(data.importe);
         $("#tipo").val(data.tipo);
-        $("#tipo").selectpicker('refresh');
-
     })
 }
 
@@ -174,9 +173,5 @@ function eliminar(idgasto){
       })
 
 }
-
-$(document).ready(function() {
-    $('.select2').select2();
-});
 
 init();

@@ -1,4 +1,4 @@
-var tabla;
+let tabla;
 
 //Funcion que se ejecita al inicio
 function init() {
@@ -63,7 +63,8 @@ function listar()
 		            'copyHtml5',
 		            'excelHtml5',
 		            'csvHtml5',
-		            'pdf'
+		            'pdf',
+                    'print'
 		        ],
 		"ajax":
 				{
@@ -96,7 +97,13 @@ function guardaryeditar(e){
         processData: false,
 
         success: function(datos){
-            bootbox.alert(datos);
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -156,20 +163,29 @@ function activar(idusuario){
 //FUNCION ELIMINAR
 function eliminar(idusuario){
 
-    bootbox.confirm("¿Está seguro de eliminar este usuario?",function(result){
-
-        if(result){
-
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
             $.post("../ajax/usuario.ajax.php?op=eliminar", {idusuario : idusuario}, function(e){
 
-                bootbox.alert(e);
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
                 tabla.ajax.reload();
 
             });
-
+          
         }
-        
-    })
+      })
 
 }
 

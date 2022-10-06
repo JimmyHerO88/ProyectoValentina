@@ -37,13 +37,13 @@ switch ($_GET["op"]){
         
         if(empty($idusuario)){
 
-            $rspta = $usuario->insertar($login, $clave, $nombre,  $imagen);
+            $rspta = $usuario->insertar($nombre, $login, $clave, $imagen);
 
             echo $rspta ? "El registro se ha guardado correctamente" : "El registro no se pudo guardar";
 
         }else{
 
-            $rspta = $usuario->editar($idusuario, $login, $clave, $nombre, $imagen);
+            $rspta = $usuario->editar($idusuario, $nombre, $login, $clave, $imagen);
             echo $rspta ? "El usuario se ha modificado correctamente" : "El usuario no se pudo modificar";
 
         }
@@ -66,7 +66,7 @@ switch ($_GET["op"]){
 
         while ($reg=$rspta->fetch_object()){
             $data[]=array(
-                "0"=>'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idusuario.')"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                "0"=>'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idusuario.')"><i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idusuario.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
                 "1"=>$reg->nombre,
                 "2"=>$reg->login,
