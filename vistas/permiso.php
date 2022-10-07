@@ -1,5 +1,11 @@
 <?php
+  ob_start();
+  session_start();
 
+  if(!isset($_SESSION['nombre'])){
+    header('Location: login.html');
+  }else{
+  
   require 'header.php';
 
 ?>
@@ -46,3 +52,10 @@
 ?>
 
 <script type="text/javascript" src="scripts/permiso.js"></script>
+
+<?php
+
+  }
+ob_end_flush();
+
+?>

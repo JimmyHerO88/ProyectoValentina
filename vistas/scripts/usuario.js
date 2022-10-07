@@ -1,25 +1,32 @@
-let tabla;
+var tabla;
 
-//Funcion que se ejecita al inicio
-function init() {
-    mostrarform(false);
-    listar();
+//Funcion que se ejecuta al inicio
+function init(){
+	mostrarform(false);
+	listar();
 
-    $("#formularioUsuarios").on("submit", function(e){
-        guardaryeditar(e);
-    })
+	$("#formulario").on("submit",function(e)
+	{
+		guardaryeditar(e);	
+	})
 
-    $("#imagenmuestra").hide();
+	$("#imagenmuestra").hide();
+	//Mostramos los permisos
+	$.post("../ajax/usuario.ajax.php?op=permisos&id=",function(r){
+	        $("#permisos").html(r);
+	});
 }
 
 //Funcion limpiar
 function limpiar(){
+
     $("#nombre").val("");
 	$("#login").val("");
 	$("#clave").val("");
 	$("#imagenmuestra").attr("src","");
 	$("#imagenactual").val("");
 	$("#idusuario").val("");
+
 }
 
 //Funcion mostrar formulario
@@ -63,8 +70,7 @@ function listar()
 		            'copyHtml5',
 		            'excelHtml5',
 		            'csvHtml5',
-		            'pdf',
-                    'print'
+		            'pdf'
 		        ],
 		"ajax":
 				{
@@ -86,7 +92,7 @@ function guardaryeditar(e){
 
     e.preventDefault();//No se activará la acción predeterminada del evento
     $("#btnGuardar").prop("disabled", true);
-    var formData = new FormData($("#formularioUsuarios")[0]);
+    var formData = new FormData($("#formulario")[0]);
 
     $.ajax({
 
@@ -131,6 +137,9 @@ function mostrar(idusuario){
 		$("#idusuario").val(data.idusuario);
 
  	});
+ 	$.post("../ajax/usuario.ajax.php?op=permisos&id="+idusuario,function(r){
+	        $("#permisos").html(r);
+	});
 }
 
 //FUNCION DESACTIVAR
@@ -160,7 +169,7 @@ function activar(idusuario){
     //})
 }
 
-//FUNCION ELIMINAR
+//FUNCION DESACTIVAR
 function eliminar(idusuario){
 
     Swal.fire({
