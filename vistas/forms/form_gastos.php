@@ -30,9 +30,9 @@
                                 <label>Tpo de gasto</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select id="tipo" name="tipo" class="form-control seleckpicker" data-dropdown-css-class="select2-warning" style="width: 100%;" >
-                                        <option value="TIENDA" selected>Tienda</option>
-                                        <option value="PERSONAL">Personal</option>
+                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;">
+                                        <option value="TIENDA" selected>TIENDA</option>
+                                        <option value="PERSONAL">PERSONAL</option>
                                     </select>
                                 </div>
                             </div>

@@ -10,12 +10,7 @@ function init(){
 
         guardaryeditar(e);
 
-    });
-
-    //Initialize Select2 Elements
-    $(document).ready(function(){
-        $('.select2').select2();
-    });
+    })
 
 }
 
@@ -27,11 +22,9 @@ function mayus(e) {
 //Funcion limpiar
 function limpiar(){
 
-    $("#idgasto").val("");
-    $("#fecha").val("");
-    $("#tipo").val("");
-    $("#concepto").val("");
-    $("#importe").val("");
+    $("#idproveedor").val("");
+    $("#nombre").val("");
+    $("#idusuario").val("");
 
 
 }
@@ -78,16 +71,15 @@ function listar(){
                     'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
-                    'pdf',
-                    'print'
+                    'pdf'
                 ],
         "ajax":
                 {
-                    url: '../ajax/gasto.ajax.php?op=listar',
+                    url: '../ajax/proveedor.ajax.php?op=listar',
                     type: "get",
                     dataType: "json",
                     error: function(e){
-                        console.log(e.responseText);
+                        console,log(e.responseText);
                     }
                 },
 
@@ -108,20 +100,14 @@ function guardaryeditar(e){
 
     $.ajax({
 
-        url: "../ajax/gasto.ajax.php?op=guardaryeditar",
+        url: "../ajax/proveedor.ajax.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
 
         success: function(datos){
-            Swal.fire({
-                icon: 'success',
-                title: datos,
-                showConfirmButton: false,
-                timer: 1500
-            })
-            
+            bootbox.alert(datos);
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -133,49 +119,65 @@ function guardaryeditar(e){
 }
 
 //FUNCION MOSTRAR
-function mostrar(idgasto){
+function mostrar(idproveedor){
 
-    $.post("../ajax/gasto.ajax.php?op=mostrar", {idgasto:idgasto}, function(data, status){
+    $.post("../ajax/proveedor.ajax.php?op=mostrar", {idproveedor:idproveedor}, function(data, status){
 
         data = JSON.parse(data);
         mostrarform(true);
 
-        console.log(data);
+        $("#idproveedor").val(data.idproveedor);
+        $("#nombre").val(data.nombre);
+        $("#idusuario").val(data.idusuario);
 
-        $("#idgasto").val(data.idgasto);
-        $("#concepto").val(data.concepto);
-        $("#fecha").val(data.fecha);
-        $("#importe").val(data.importe);
-        $("#tipo").val(data.tipo);
     })
 }
 
+
 //FUNCION DESACTIVAR
-function eliminar(idgasto){
+function desactivar(idproveedor){
 
-    Swal.fire({
-        title: '¿Está seguro de eliminar este registro?',
-        text: "Los registros eliminados ya no se podran recuperar",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: 'btn btn-success',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar registro'
-      }).then((result) => {
-        if (result.isConfirmed) {
-            $.post("../ajax/gasto.ajax.php?op=eliminar", {idgasto : idgasto}, function(e){
+    //bootbox.confirm("¿Está seguro de desactivar esta categoría?",function(result){
 
-                Swal.fire(
-                    '¡Registro Eliminado!',
-                    'EL registro se ha eliminado con éxito.',
-                    'success'
-                  )
+      
+        $.post("../ajax/proveedor.ajax.php?op=desactivar", {idproveedor:idproveedor}, function(e){
+
+            //bootbox.alert(e);
+            tabla.ajax.reload();
+        });
+   // })
+}
+
+//FUNCION ACTIVAR
+function activar(idproveedor){
+
+    //bootbox.confirm("¿Está seguro de activar esta categoría?",function(result){
+
+        $.post("../ajax/proveedor.ajax.php?op=activar", {idproveedor:idproveedor}, function(e){
+
+            //bootbox.alert(e);
+            tabla.ajax.reload();
+        });
+    //})
+}
+
+//FUNCION ELIMINAR
+function eliminar(idproveedor){
+
+    bootbox.confirm("¿Está seguro de eliminar esta línea?",function(result){
+      
+        if(result){
+
+            $.post("../ajax/proveedor.ajax.php?op=eliminar", {idproveedor : idproveedor}, function(e){
+
+                bootbox.alert(e);
                 tabla.ajax.reload();
 
             });
-          
+
         }
-      })
+
+    })
 
 }
 

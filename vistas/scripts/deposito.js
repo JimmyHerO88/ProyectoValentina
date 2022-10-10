@@ -6,7 +6,7 @@ function init(){
     mostrarform(false);
     listar();
 
-    $("#formulario").on("submit", function(e){
+    $("#formulario_depositos").on("submit", function(e){
 
         guardaryeditar(e);
 
@@ -27,7 +27,7 @@ function mayus(e) {
 //Funcion limpiar
 function limpiar(){
 
-    $("#idgasto").val("");
+    $("#iddeposito").val("");
     $("#fecha").val("");
     $("#tipo").val("");
     $("#concepto").val("");
@@ -44,7 +44,7 @@ function mostrarform(flag){
     if(flag){
 
         $("#listadoregistros").hide();
-        $("#formularioregistros").show();
+        $("#formularioDepositos").show();
         $("#btnGuardar").prop("disabled", false);
         $("#btnagregar").hide();
         $("#Vale").hide();
@@ -52,7 +52,7 @@ function mostrarform(flag){
     }else{
 
         $("#listadoregistros").show();
-        $("#formularioregistros").hide();
+        $("#formularioDepositos").hide();
         $("#btnagregar").show();
         $("#Vale").hide();
 
@@ -83,7 +83,7 @@ function listar(){
                 ],
         "ajax":
                 {
-                    url: '../ajax/gasto.ajax.php?op=listar',
+                    url: '../ajax/deposito.ajax.php?op=listar',
                     type: "get",
                     dataType: "json",
                     error: function(e){
@@ -108,7 +108,7 @@ function guardaryeditar(e){
 
     $.ajax({
 
-        url: "../ajax/gasto.ajax.php?op=guardaryeditar",
+        url: "../ajax/deposito.ajax.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -133,16 +133,16 @@ function guardaryeditar(e){
 }
 
 //FUNCION MOSTRAR
-function mostrar(idgasto){
+function mostrar(iddeposito){
 
-    $.post("../ajax/gasto.ajax.php?op=mostrar", {idgasto:idgasto}, function(data, status){
+    $.post("../ajax/deposito.ajax.php?op=mostrar", {iddeposito:iddeposito}, function(data, status){
 
         data = JSON.parse(data);
         mostrarform(true);
 
         console.log(data);
 
-        $("#idgasto").val(data.idgasto);
+        $("#iddeposito").val(data.iddeposito);
         $("#concepto").val(data.concepto);
         $("#fecha").val(data.fecha);
         $("#importe").val(data.importe);
@@ -151,7 +151,7 @@ function mostrar(idgasto){
 }
 
 //FUNCION DESACTIVAR
-function eliminar(idgasto){
+function eliminar(iddeposito){
 
     Swal.fire({
         title: '¿Está seguro de eliminar este registro?',
@@ -163,7 +163,7 @@ function eliminar(idgasto){
         confirmButtonText: 'Si, eliminar registro'
       }).then((result) => {
         if (result.isConfirmed) {
-            $.post("../ajax/gasto.ajax.php?op=eliminar", {idgasto : idgasto}, function(e){
+            $.post("../ajax/deposito.ajax.php?op=eliminar", {iddeposito : iddeposito}, function(e){
 
                 Swal.fire(
                     '¡Registro Eliminado!',

@@ -1,14 +1,14 @@
 <?php
 
 require_once "global.php";
-
+ 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=valentina', 'root', '');
+    $pdo = new PDO("mysql:host=localhost;dbname=valentina", "root", "");
     //echo 'conectado';
 } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
-}
+} 
 
 $conexion = new mysqli(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);
 

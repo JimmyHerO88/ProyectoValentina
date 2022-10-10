@@ -10,30 +10,17 @@ function init(){
 
         guardaryeditar(e);
 
-    });
+    })
 
-    //Initialize Select2 Elements
-    $(document).ready(function(){
-        $('.select2').select2();
-    });
-
-}
-
-//Funcion mayusculas
-function mayus(e) {
-    e.value = e.value.toUpperCase();
 }
 
 //Funcion limpiar
 function limpiar(){
 
-    $("#idgasto").val("");
-    $("#fecha").val("");
-    $("#tipo").val("");
-    $("#concepto").val("");
-    $("#importe").val("");
-
-
+    $("#idsucursal").val("");
+    $("#razon_social").val("");
+    $("#logomuestra").attr("src","");
+    $("#logoactual").val("");
 }
 
 //Funcion mostrar formulario
@@ -47,14 +34,12 @@ function mostrarform(flag){
         $("#formularioregistros").show();
         $("#btnGuardar").prop("disabled", false);
         $("#btnagregar").hide();
-        $("#Vale").hide();
 
     }else{
 
         $("#listadoregistros").show();
         $("#formularioregistros").hide();
         $("#btnagregar").show();
-        $("#Vale").hide();
 
     }
 
@@ -78,22 +63,21 @@ function listar(){
                     'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
-                    'pdf',
-                    'print'
+                    'pdf'
                 ],
         "ajax":
                 {
-                    url: '../ajax/gasto.ajax.php?op=listar',
+                    url: '../ajax/sucursal.ajax.php?op=listar',
                     type: "get",
                     dataType: "json",
                     error: function(e){
-                        console.log(e.responseText);
+                        console,log(e.responseText);
                     }
                 },
 
         "bDestroy": true,
         "iDisplayLength": 10,//Paginación
-        "order": [[1, "desc"]]
+        "order": [[0, "desc"]]
 
     }).DataTable();
 
@@ -108,20 +92,14 @@ function guardaryeditar(e){
 
     $.ajax({
 
-        url: "../ajax/gasto.ajax.php?op=guardaryeditar",
+        url: "../ajax/sucursal.ajax.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
 
         success: function(datos){
-            Swal.fire({
-                icon: 'success',
-                title: datos,
-                showConfirmButton: false,
-                timer: 1500
-            })
-            
+            bootbox.alert(datos);
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -133,49 +111,66 @@ function guardaryeditar(e){
 }
 
 //FUNCION MOSTRAR
-function mostrar(idgasto){
+function mostrar(idsucursal){
 
-    $.post("../ajax/gasto.ajax.php?op=mostrar", {idgasto:idgasto}, function(data, status){
+    $.post("../ajax/sucursal.ajax.php?op=mostrar", {idsucursal:idsucursal}, function(data, status){
 
         data = JSON.parse(data);
         mostrarform(true);
 
-        console.log(data);
+        $("#idsucursal").val(data.idsucursal);
+        $("#razon_social").val(data.razon_social);
+        $("#logomuestra").show();
+        $("#logomuestra").attr("src","../"+data.logo)
+        $("#logoactual").val(data.logo);
 
-        $("#idgasto").val(data.idgasto);
-        $("#concepto").val(data.concepto);
-        $("#fecha").val(data.fecha);
-        $("#importe").val(data.importe);
-        $("#tipo").val(data.tipo);
     })
 }
 
 //FUNCION DESACTIVAR
-function eliminar(idgasto){
+function desactivar(idsucursal){
 
-    Swal.fire({
-        title: '¿Está seguro de eliminar este registro?',
-        text: "Los registros eliminados ya no se podran recuperar",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: 'btn btn-success',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar registro'
-      }).then((result) => {
-        if (result.isConfirmed) {
-            $.post("../ajax/gasto.ajax.php?op=eliminar", {idgasto : idgasto}, function(e){
+    //bootbox.confirm("¿Está seguro de desactivar esta categoría?",function(result){
 
-                Swal.fire(
-                    '¡Registro Eliminado!',
-                    'EL registro se ha eliminado con éxito.',
-                    'success'
-                  )
+      
+        $.post("../ajax/sucursal.ajax.php?op=desactivar", {idsucursal : idsucursal}, function(e){
+
+            //bootbox.alert(e);
+            tabla.ajax.reload();
+        });
+   // })
+}
+
+//FUNCION ACTIVAR
+function activar(idsucursal){
+
+    //bootbox.confirm("¿Está seguro de activar esta categoría?",function(result){
+
+        $.post("../ajax/sucursal.ajax.php?op=activar", {idsucursal : idsucursal}, function(e){
+
+            //bootbox.alert(e);
+            tabla.ajax.reload();
+        });
+    //})
+}
+
+//FUNCION DESACTIVAR
+function eliminar(idsucursal){
+
+    bootbox.confirm("¿Está seguro de eliminar esta sucursal?",function(result){
+
+        if(result){
+
+            $.post("../ajax/sucursal.ajax.php?op=eliminar", {idsucursal : idsucursal}, function(e){
+
+                bootbox.alert(e);
                 tabla.ajax.reload();
 
             });
-          
+
         }
-      })
+
+    })
 
 }
 

@@ -70,7 +70,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="depositos" class="nav-link">Depósitos</a>
+        <a href="forms/form_depositos.php" class="nav-link">Depósitos</a>
       </li>
       
       <li class="nav-item d-none d-sm-inline-block">
@@ -113,10 +113,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="img/usuarios/avatar.png" class="img-circle elevation-2" alt="User Image">
+          <img src="../<?php echo $_SESSION['imagen'];?>" class="img-circle elevation-2" alt="<?php echo $_SESSION['nombre'];?>">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['nombre'];?></a>
           <a href="../ajax/usuario.ajax.php?op=salir" class="btn btn-xs btn-dark">Cerrar Sesión</a>
         </div>
       </div>
