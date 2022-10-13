@@ -3,23 +3,27 @@
 require "../config/Conexion.php";
 
 Class Deposito{
+
     //Metodo constructor
-    public function _construct(){}
+    public function _construct(){
+
+
+    }
 
     //Metodo para INSERTAR registros
-    public function insertar($fecha, $concepto, $tipo, $importe){
+    public function insertar($tipo, $concepto, $importe, $cant1, $cant2, $cant3, $cant4, $cant5, $cant6, $cant7, $fecha, $idusuario, $idsucursal){
 
-        $sql = "INSERT INTO deposito (fecha, concepto, tipo, importe)
-                VALUES ('$fecha', '$concepto', '$tipo', '$importe')";
+        $sql = "INSERT INTO deposito (tipo, concepto, importe, cant1, cant2, cant3, cant4, cant5, cant6, cant7, fecha, idusuario, idsucursal)
+                VALUES ('$tipo', '$concepto', '$importe', '$cant1', '$cant2', '$cant3', '$cant4', '$cant5', '$cant6', '$cant7', '$fecha', '$idusuario', 1)";
         
         return ejecutarConsulta($sql);
 
     }
 
     //Metodo para EDITAR registros
-    public function editar($iddeposito, $fecha, $concepto, $tipo, $importe){
+    public function editar($iddeposito, $tipo, $concepto, $importe, $cant1, $cant2, $cant3, $cant4, $cant5, $cant6, $cant7, $fecha, $idusuario){
 
-        $sql = "UPDATE deposito SET fecha = '$fecha', concepto = '$concepto', tipo = '$tipo', importe = '$importe' WHERE iddeposito = '$iddeposito'";
+        $sql = "UPDATE deposito SET tipo = '$tipo', concepto = '$concepto', importe = '$importe', cant1 = '$cant1', cant2 = '$cant2', cant3 = '$cant3', cant4 = '$cant4', cant5 = '$cant5', cant6 = '$cant6', cant7 = '$cant7', fecha = '$fecha', idusuario = '$idusuario' WHERE iddeposito = '$iddeposito'";
 
         return ejecutarConsulta($sql);
 
@@ -42,7 +46,7 @@ Class Deposito{
         return ejecutarConsulta($sql);
 
     }
-    
+
     //Metodo para ELIMINAR LAS depositoS 
     public function eliminar($iddeposito){
 
@@ -51,5 +55,5 @@ Class Deposito{
         return ejecutarConsulta($sql);
 
     }
-    
+
 }

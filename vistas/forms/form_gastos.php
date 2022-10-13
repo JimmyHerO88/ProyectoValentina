@@ -30,7 +30,7 @@
                                 <label>Tpo de gasto</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;">
+                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>
                                         <option value="TIENDA" selected>TIENDA</option>
                                         <option value="PERSONAL">PERSONAL</option>
                                     </select>
@@ -50,6 +50,16 @@
                                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                     </div>
                                     <input type="number" step="any" class="form-control input-lg" name="importe" id="importe" maxlendth="120" placeholder="Importe" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group ">
+                                    <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>"
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group ">
+                                    <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>"
                                 </div>
                             </div>
                             <div class="card-footer">

@@ -8,6 +8,8 @@
   
   require 'header.php';
 
+  if($_SESSION['corte_caja'] == 1){
+ 
 ?>
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -62,7 +64,10 @@
     </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
 <?php
-
+   
+  }else{
+    require 'noacceso.php';
+  }
   require 'footer.php';
 
 ?>

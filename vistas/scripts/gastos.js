@@ -12,11 +12,6 @@ function init(){
 
     });
 
-    //Initialize Select2 Elements
-    $(document).ready(function(){
-        $('.select2').select2();
-    });
-
 }
 
 //Funcion mayusculas
@@ -28,6 +23,7 @@ function mayus(e) {
 function limpiar(){
 
     $("#idgasto").val("");
+    $("#idusuario").val("");
     $("#fecha").val("");
     $("#tipo").val("");
     $("#concepto").val("");
@@ -138,16 +134,18 @@ function mostrar(idgasto){
     $.post("../ajax/gasto.ajax.php?op=mostrar", {idgasto:idgasto}, function(data, status){
 
         data = JSON.parse(data);
+        let tipo = document.getElementById("tipo");
         mostrarform(true);
 
-        console.log(data);
-
         $("#idgasto").val(data.idgasto);
-        $("#concepto").val(data.concepto);
-        $("#fecha").val(data.fecha);
-        $("#importe").val(data.importe);
+        $("#idusuario").val(data.idusuario);
         $("#tipo").val(data.tipo);
+        $("#fecha").val(data.fecha);
+        $("#concepto").val(data.concepto);
+        $("#importe").val(data.importe);
+
     })
+
 }
 
 //FUNCION DESACTIVAR

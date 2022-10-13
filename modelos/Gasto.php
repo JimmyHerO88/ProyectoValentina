@@ -7,19 +7,19 @@ Class Gasto{
     public function _construct(){}
 
     //Metodo para INSERTAR registros
-    public function insertar($fecha, $concepto, $tipo, $importe){
+    public function insertar($fecha, $concepto, $tipo, $importe, $idusuario){
 
-        $sql = "INSERT INTO gasto (fecha, concepto, tipo, importe)
-                VALUES ('$fecha', '$concepto', '$tipo', '$importe')";
+        $sql = "INSERT INTO gasto (fecha, concepto, tipo, importe, idusuario)
+                VALUES ('$fecha', '$concepto', '$tipo', '$importe', '$idusuario')";
         
         return ejecutarConsulta($sql);
 
     }
 
     //Metodo para EDITAR registros
-    public function editar($idgasto, $fecha, $concepto, $tipo, $importe){
+    public function editar($idgasto, $fecha, $concepto, $tipo, $importe, $idusuario){
 
-        $sql = "UPDATE gasto SET fecha = '$fecha', concepto = '$concepto', tipo = '$tipo', importe = '$importe' WHERE idgasto = '$idgasto'";
+        $sql = "UPDATE gasto SET fecha = '$fecha', concepto = '$concepto', tipo = '$tipo', importe = '$importe', idusuario = '$idusuario' WHERE idgasto = '$idgasto'";
 
         return ejecutarConsulta($sql);
 

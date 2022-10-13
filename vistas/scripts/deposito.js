@@ -6,16 +6,11 @@ function init(){
     mostrarform(false);
     listar();
 
-    $("#formulario_depositos").on("submit", function(e){
+    $("#formulario").on("submit", function(e){
 
         guardaryeditar(e);
 
-    });
-
-    //Initialize Select2 Elements
-    $(document).ready(function(){
-        $('.select2').select2();
-    });
+    })
 
 }
 
@@ -30,8 +25,18 @@ function limpiar(){
     $("#iddeposito").val("");
     $("#fecha").val("");
     $("#tipo").val("");
-    $("#concepto").val("");
+    $("#observacion").val("");
     $("#importe").val("");
+    $("#usuario").val("");
+    $("#idusuario").val("");
+    $("#idsucursal").val("");
+    $("#cant1").val(0);
+    $("#cant2").val(0);
+    $("#cant3").val(0);
+    $("#cant4").val(0);
+    $("#cant5").val(0);
+    $("#cant6").val(0);
+    $("#cant7").val(0);
 
 
 }
@@ -44,17 +49,15 @@ function mostrarform(flag){
     if(flag){
 
         $("#listadoregistros").hide();
-        $("#formularioDepositos").show();
+        $("#formularioregistros").show();
         $("#btnGuardar").prop("disabled", false);
         $("#btnagregar").hide();
-        $("#Vale").hide();
 
     }else{
 
         $("#listadoregistros").show();
-        $("#formularioDepositos").hide();
+        $("#formularioregistros").hide();
         $("#btnagregar").show();
-        $("#Vale").hide();
 
     }
 
@@ -78,8 +81,7 @@ function listar(){
                     'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
-                    'pdf',
-                    'print'
+                    'pdf'
                 ],
         "ajax":
                 {
@@ -87,12 +89,12 @@ function listar(){
                     type: "get",
                     dataType: "json",
                     error: function(e){
-                        console.log(e.responseText);
+                        console,log(e.responseText);
                     }
                 },
 
         "bDestroy": true,
-        "iDisplayLength": 10,//Paginación
+        "iDisplayLength": 20,//Paginación
         "order": [[1, "desc"]]
 
     }).DataTable();
@@ -140,13 +142,20 @@ function mostrar(iddeposito){
         data = JSON.parse(data);
         mostrarform(true);
 
-        console.log(data);
-
         $("#iddeposito").val(data.iddeposito);
-        $("#concepto").val(data.concepto);
-        $("#fecha").val(data.fecha);
-        $("#importe").val(data.importe);
         $("#tipo").val(data.tipo);
+        $("#fecha").val(data.fecha);
+        $("#observacion").val(data.concepto);
+        $("#importe").val(data.importe);
+        $("#cant1").val(data.cant1);
+        $("#cant2").val(data.cant2);
+        $("#cant3").val(data.cant3);
+        $("#cant4").val(data.cant4);
+        $("#cant5").val(data.cant5);
+        $("#cant6").val(data.cant6);
+        $("#cant7").val(data.cant7);
+        $("#idusuario").val(data.idusuario);
+
     })
 }
 

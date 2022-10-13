@@ -5,10 +5,21 @@ require_once "../modelos/Deposito.php";
 $deposito = new Deposito();
 
 $iddeposito = isset($_POST["iddeposito"])? limpiarCadena($_POST["iddeposito"]) : "";
-$tipo = isset($_POST["tipo"])? limpiarCadena($_POST["tipo"]) : "";
 $fecha = isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]) : "";
-$concepto = isset($_POST["concepto"])? limpiarCadena($_POST["concepto"]) : "";
+$idusuario = isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]) : "";
+$idsucursal = isset($_POST["idsucursal"])? limpiarCadena($_POST["idsucursal"]) : "";
+$nombre_deposito = isset($_POST["nombre_deposito"])? limpiarCadena($_POST["nombre_deposito"]) : "";
+$observacion = isset($_POST["observacion"])? limpiarCadena($_POST["observacion"]) : "";
 $importe = isset($_POST["importe"])? limpiarCadena($_POST["importe"]) : "";
+$tipo = isset($_POST["tipo"])? limpiarCadena($_POST["tipo"]) : "";
+$cant1 = isset($_POST["cant1"])? limpiarCadena($_POST["cant1"]) : "";
+$cant2 = isset($_POST["cant2"])? limpiarCadena($_POST["cant2"]) : "";
+$cant3 = isset($_POST["cant3"])? limpiarCadena($_POST["cant3"]) : "";
+$cant4 = isset($_POST["cant4"])? limpiarCadena($_POST["cant4"]) : "";
+$cant5 = isset($_POST["cant5"])? limpiarCadena($_POST["cant5"]) : "";
+$cant6 = isset($_POST["cant6"])? limpiarCadena($_POST["cant6"]) : "";
+$cant7 = isset($_POST["cant7"])? limpiarCadena($_POST["cant7"]) : "";
+$concepto = $nombre_deposito . '  ' . $observacion;
 
 switch ($_GET["op"]){
 
@@ -16,13 +27,12 @@ switch ($_GET["op"]){
 
         if(empty($iddeposito)){
 
-            $rspta = $deposito->insertar($fecha, $concepto, $tipo,  $importe);
-
-            echo $rspta ? "El registro se ha guardado correctamente" : "El registro no se pudo guardar";
+            $rspta = $deposito->insertar($tipo, $concepto, $importe, $cant1, $cant2, $cant3, $cant4, $cant5, $cant6, $cant7, $fecha, $idusuario, $idsucursal);
+            echo $rspta ? "El deposito se ha guardado correctamente" : "El deposito no se pudo guardar";
 
         }else{
 
-            $rspta = $deposito->editar($iddeposito, $fecha, $concepto, $tipo, $importe);
+            $rspta = $deposito->editar($iddeposito, $tipo, $concepto, $importe, $cant1, $cant2, $cant3, $cant4, $cant5, $cant6, $cant7, $fecha, $idusuario, $idsucursal);
             echo $rspta ? "El deposito se ha modificado correctamente" : "El deposito no se pudo modificar";
 
         }
@@ -49,8 +59,8 @@ switch ($_GET["op"]){
                             <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->iddeposito.')"><i class="fa fa-times" aria-hidden="true"></i></button>
                             <button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->iddeposito.')"><i class="fas fa-edit"></i></button>',
                             "1" => $reg->fecha,
-                            "2" => $reg->concepto,
-                            "3" => $reg->tipo,
+                            "2" => $reg->tipo,
+                            "3" => $reg->concepto,
                             "4" => '$ '.number_format($reg->importe,2)
                             );
         }

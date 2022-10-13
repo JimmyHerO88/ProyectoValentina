@@ -31,8 +31,8 @@
                           <thead>
                             <th>Opciones</th>
                             <th>Fecha</th>
-                            <th>Concepto</th>
-                            <th>Tipo</th>
+                            <th>Tipo Depósito</th>
+                            <th>Observación</th>
                             <th>Importe</th>
                           </thead>
 
@@ -43,8 +43,8 @@
                           <tfoot>
                             <th>Opciones</th>
                             <th>Fecha</th>
-                            <th>Concepto</th>
-                            <th>Tipo</th>
+                            <th>Tipo Depósito</th>
+                            <th>Observación</th>
                             <th>Importe</th>
                           </tfoot>
                         </table>
@@ -74,6 +74,7 @@
 ?>
 
 <script type="text/javascript" src="scripts/deposito.js"></script>
+
 <?php
 }
 ob_end_flush();

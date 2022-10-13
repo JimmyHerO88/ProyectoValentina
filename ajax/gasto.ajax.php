@@ -9,6 +9,7 @@ $tipo = isset($_POST["tipo"])? limpiarCadena($_POST["tipo"]) : "";
 $fecha = isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]) : "";
 $concepto = isset($_POST["concepto"])? limpiarCadena($_POST["concepto"]) : "";
 $importe = isset($_POST["importe"])? limpiarCadena($_POST["importe"]) : "";
+$idusuario = isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]) : "";
 
 switch ($_GET["op"]){
 
@@ -16,13 +17,13 @@ switch ($_GET["op"]){
 
         if(empty($idgasto)){
 
-            $rspta = $gasto->insertar($fecha, $concepto, $tipo,  $importe);
+            $rspta = $gasto->insertar($fecha, $concepto, $tipo, $importe, $idusuario);
 
             echo $rspta ? "El registro se ha guardado correctamente" : "El registro no se pudo guardar";
 
         }else{
 
-            $rspta = $gasto->editar($idgasto, $fecha, $concepto, $tipo, $importe);
+            $rspta = $gasto->editar($idgasto, $fecha, $concepto, $tipo, $importe, $idusuario);
             echo $rspta ? "El gasto se ha modificado correctamente" : "El gasto no se pudo modificar";
 
         }

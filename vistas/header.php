@@ -69,6 +69,9 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      <?php
+        if($_SESSION['corte_caja'] == 1){
+      ?>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="forms/form_depositos.php" class="nav-link">Depósitos</a>
       </li>
@@ -76,7 +79,12 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="gastos" class="nav-link">Gastos</a>
       </li>
-      
+      <?php
+        }
+      ?>
+      <?php
+        if($_SESSION['nomina'] == 1){
+      ?>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Préstamos</a>
       </li>
@@ -96,6 +104,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Clientes</a>
       </li>
+      <?php
+        }
+      ?>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -116,7 +127,7 @@
           <img src="../<?php echo $_SESSION['imagen'];?>" class="img-circle elevation-2" alt="<?php echo $_SESSION['nombre'];?>">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['nombre'];?></a>
+          <a href="#" class="d-block"><?php echo $_SESSION['login'];?></a>
           <a href="../ajax/usuario.ajax.php?op=salir" class="btn btn-xs btn-dark">Cerrar Sesión</a>
         </div>
       </div>
@@ -126,157 +137,176 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
+        <?php
+          if($_SESSION['escritorio'] == 1){
+            echo '<li class="nav-item">
+                    <a href="inicio" class="nav-link">
+                      <i class="nav-icon fa fa-tasks"></i>
+                      <p>Escritorio</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fa fa-search"></i>
+                      <p>
+                        Consultas
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                  </li>';
+          }
+        ?>
+
+        <?php
+          if($_SESSION['corte_caja'] == 1){
+            echo '<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="gastos.php" class="nav-link">
+                        <i class="far fa fa-credit-card nav-icon"></i>
+                        <p>Gastos</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="depositos.php" class="nav-link">
+                        <i class="fas fa-chart-line nav-icon"></i>
+                        <p>Depósitos</p>
+                      </a>
+                    </li>
+                  </ul>';
+          }
+        ?>
+
+        <?php
+          if($_SESSION['acceso'] == 1){
+            echo '<li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-user"></i>
+                      <p>
+                        Acceso
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="usuario.php" class="nav-link">
+                          <i class="far fa fa-users nav-icon"></i>
+                          <p>Usuarios</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="permiso.php" class="nav-link">
+                          <i class="far fas fa-check-circle nav-icon"></i>
+                          <p>Permisos</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>';
+          }
+        ?>
         
-        <li class="nav-item">
-          <a href="inicio" class="nav-link">
-            <i class="nav-icon fa fa-tasks"></i>
-            <p>Escritorio</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fa fa-search"></i>
-            <p>
-              Consultas
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="gastos.php" class="nav-link">
-                <i class="far fa fa-credit-card nav-icon"></i>
-                <p>Gastos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="fas fa-chart-line nav-icon"></i>
-                <p>Ingresos</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
-            <p>
-              Acceso
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="usuario.php" class="nav-link">
-                <i class="far fa fa-users nav-icon"></i>
-                <p>Usuarios</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="permiso.php" class="nav-link">
-                <i class="far fas fa-check-circle nav-icon"></i>
-                <p>Permisos</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" class="nav-link activate">
-            <i class="nav-icon fas fa-book"></i>
-            <p>
-              Corte de caja
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
-                <i class="far fas fa-th-large nav-icon"></i>
-                <p>Resumen</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="depositos.php" class="nav-link">
-                <i class="far fas fa-money-bill nav-icon"></i>
-                <p>Depósitos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="gastos.php" class="nav-link">
-                <i class="far fas fa-credit-card nav-icon"></i>
-                <p>Gastos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="far fas fa-sticky-note nav-icon"></i>
-                <p>Registro de notas</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="far fas fa-handshake nav-icon"></i>
-                <p>Liquidaciones</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="far fas fa-user-tie nav-icon"></i>
-                <p>Pago a Proveedores</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-receipt"></i>
-            <p>
-              Nómina
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
-                <i class="far fas fa-user-tag nav-icon"></i>
-                <p>Alta de Empelados</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="fas fa-money-check-alt nav-icon"></i>
-                <p>Préstamos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="far fas fa-file-invoice-dollar nav-icon"></i>
-                <p>Adelantos de nómina</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="fas fa-money-check nav-icon"></i>
-                <p>Abonos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="far fas fa-envelope-open nav-icon"></i>
-                <p>Prenómina</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="far fas fa-archive nav-icon"></i>
-                <p>Nómina General</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+        <?php
+          if($_SESSION['corte_caja'] == 1){
+            echo '<li class="nav-item">
+                    <a href="#" class="nav-link activate">
+                      <i class="nav-icon fas fa-book"></i>
+                      <p>
+                        Corte de caja
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="pages/charts/chartjs.html" class="nav-link">
+                          <i class="far fas fa-th-large nav-icon"></i>
+                          <p>Resumen</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="depositos.php" class="nav-link">
+                          <i class="far fas fa-money-bill nav-icon"></i>
+                          <p>Depósitos</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="gastos.php" class="nav-link">
+                          <i class="far fas fa-credit-card nav-icon"></i>
+                          <p>Gastos</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="far fas fa-sticky-note nav-icon"></i>
+                          <p>Registro de notas</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="far fas fa-handshake nav-icon"></i>
+                          <p>Liquidaciones</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="far fas fa-user-tie nav-icon"></i>
+                          <p>Pago a Proveedores</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>';
+          }
+        ?>
+        
+        <?php
+          if($_SESSION['nomina'] == 1){
+            echo '<li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-receipt"></i>
+                      <p>
+                        Nómina
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="pages/charts/chartjs.html" class="nav-link">
+                          <i class="far fas fa-user-tag nav-icon"></i>
+                          <p>Alta de Empelados</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="fas fa-money-check-alt nav-icon"></i>
+                          <p>Préstamos</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="far fas fa-file-invoice-dollar nav-icon"></i>
+                          <p>Adelantos de nómina</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="fas fa-money-check nav-icon"></i>
+                          <p>Abonos</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="far fas fa-envelope-open nav-icon"></i>
+                          <p>Prenómina</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                          <i class="far fas fa-archive nav-icon"></i>
+                          <p>Nómina General</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>';
+          }
+        ?>        
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
