@@ -36,7 +36,7 @@
                                 <label>Tipo de depósito</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;">
+                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>
                                     <option value="DEPÓSITO">DEPÓSITO</option>
                                     <option value="TARJETA">TARJETA</option>
                                     <option value="TRANSFERENCIA BANCARIA">TRANSFERENCIA BANCARIA</option>
@@ -75,14 +75,13 @@
                                 </div>
                                 <div class="form-group col-md-4 col-sm-4 col-xs-4">
                                     <div class="text-center"><label>Importe</label></div>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="resultado1" for="deno1 cant1"></output>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="resultado2" for="deno2 cant2"></output>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="resultado3" for="deno3 cant3"></output>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="resultado4" for="deno4 cant4"></output>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="resultado5" for="deno5 cant5"></output>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="resultado6" for="deno6 cant6"></output>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="resultado7" for="deno7 cant7"></output>
-                                    <output style="width: 150px; font-size: 20px; text-align: right" name="total" for="deno7 cant7"></output>
+                                    <output style="width: 150px; font-size: 20px; text-align: right" id="resultado1" name="resultado1"  for="deno1 cant1"></output>
+                                    <output style="width: 150px; font-size: 20px; text-align: right" id="resultado2" name="resultado2"  for="deno2 cant2"></output>
+                                    <output style="width: 150px; font-size: 20px; text-align: right" id="resultado3" name="resultado3"  for="deno3 cant3"></output>
+                                    <output style="width: 150px; font-size: 20px; text-align: right" id="resultado4" name="resultado4"  for="deno4 cant4"></output>
+                                    <output style="width: 150px; font-size: 20px; text-align: right" id="resultado5" name="resultado5"  for="deno5 cant5"></output>
+                                    <output style="width: 150px; font-size: 20px; text-align: right" id="resultado6" name="resultado6"  for="deno6 cant6"></output>
+                                    <output style="width: 150px; font-size: 20px; text-align: right" id="resultado7" name="resultado7"  for="deno7 cant7"></output>
                                 </div>
                             </div>                            
                             <div class="form-group">

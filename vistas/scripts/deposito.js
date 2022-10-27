@@ -37,7 +37,13 @@ function limpiar(){
     $("#cant5").val(0);
     $("#cant6").val(0);
     $("#cant7").val(0);
-
+    $("#resultado1").val("");
+    $("#resultado2").val("");
+    $("#resultado3").val("");
+    $("#resultado4").val("");
+    $("#resultado5").val("");
+    $("#resultado6").val("");
+    $("#resultado7").val("");
 
 }
 

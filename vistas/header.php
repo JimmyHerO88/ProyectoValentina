@@ -268,7 +268,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="pages/charts/chartjs.html" class="nav-link">
+                        <a href="empleados.php" class="nav-link">
                           <i class="far fas fa-user-tag nav-icon"></i>
                           <p>Alta de Empelados</p>
                         </a>

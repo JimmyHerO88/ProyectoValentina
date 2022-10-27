@@ -52,9 +52,9 @@
                                 <label for="imagen">Subir Foto</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" name="imagen" id="imagen">
-                                    <input type="hidden" name="imagenactual" id="imagenactual">
-                                    <img src="" width="150px" height="120px" id="imagenmuestra">
+                                    <input type="hidden" name="imagenactual" id="imagenactual">                                   
                                 </div>
+                                <img src="" width="200px" height="200px" id="imagenmuestra">
                             </div>
                             <!-- ENTRADA PARA LOS PERMISOS -->
                             <div class="form-group col-lg-8">
