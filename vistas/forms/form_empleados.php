@@ -47,94 +47,116 @@
                                     <input type="text" class="form-control" name="domicilio" id="domicilio" maxlength="64" placeholder="Domicilio Actual">
                                 </div>
                             </div>
-                            <!-- ENTRADA PARA TEL CONTACTO -->
-                            <div class="form-group">
-                                <label>Teléfonos de contacto</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" name="tel_1" id="tel_1" placeholder="WhatsApp">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Teléfonos de contacto</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
+                                <div class="col-6">
+                                    <!-- ENTRADA PARA TEL CONTACTO -->
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="tel_1" id="tel_1" placeholder="WhatsApp">
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" name="tel_2" id="tel_2" placeholder="Teléfono de casa o fijo">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                <div class="col-6">                            
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="tel_2" id="tel_2" placeholder="Teléfono de casa o fijo">
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" name="tel_3" id="tel_3" placeholder="Teléfono de Emergencia">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-phone-volume"></i></span>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="tel_3" id="tel_3" placeholder="Teléfono de Emergencia">
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" name="tel_4" id="tel_4" placeholder="Teléfono de Referencia">
                                 </div>
-                            </div>
-                            <!-- FECHA NACIMIENTO -->
-                            <div class="form-group">
-                                <label for="fecha">Fecha de nacimiento:</label>
-                                <div class="input-group ">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone-volume"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="tel_4" id="tel_4" placeholder="Teléfono de Referencia">
+                                        </div>
                                     </div>
-                                    <input type="date" class="form-control input-lg" name="fecha_nacimiento" id="fecha_nacimiento">
                                 </div>
-                            </div>
-                            <!-- FECHA CONTRATO -->
-                            <div class="form-group">
-                                <label for="fecha">Fecha de contrato:</label>
-                                <div class="input-group ">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                <div class="col-6">
+                                    <!-- FECHA NACIMIENTO -->
+                                    <div class="form-group">
+                                        <label for="fecha">Fecha de nacimiento:</label>
+                                        <div class="input-group ">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="date" class="form-control input-lg" name="fecha_nacimiento" id="fecha_nacimiento">
+                                        </div>
                                     </div>
-                                    <input type="date" class="form-control input-lg" name="fecha_contrato" id="fecha_contrato" >
+                                </div>
+                                <div class="col-">
+                                    <!-- FECHA CONTRATO -->
+                                    <div class="form-group">
+                                        <label for="fecha">Fecha de contrato:</label>
+                                        <div class="input-group ">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="date" class="form-control input-lg" name="fecha_contrato" id="fecha_contrato" >
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- ENTRADA PARA LA IMAGEN -->
                             <div class="form-group">
                                 <label for="imagen">Subir Foto</label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" name="imagen" id="imagen">
-                                    <input type="hidden" name="imagenactual" id="imagenactual">
+                                    <input type="file" class="form-control" name="foto" id="foto">
+                                    <input type="hidden" name="fotoactual" id="fotoactual">
                                 </div>
-                                <img src="" width="100px" height="150px" id="imagenmuestra">
+                                <img src="" width="80px" height="130px" id="fotomuestra">
                             </div>
-                            <!-- ENTRADA PARA FRENTE INE -->
-                            <div class="form-group">
-                                <label for="ine_frente">Subir Frente del INE</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control" name="ine_frente" id="ine_frente">
-                                    <input type="hidden" name="ine_frente_actual" id="ine_frente_actual">
+                            <div class="row">
+                                <div class="col-6">
+                                    <!-- ENTRADA PARA FRENTE INE -->
+                                    <div class="form-group">
+                                        <label for="ine_frente">Subir Frente del INE</label>
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" name="ine_frente" id="ine_frente">
+                                            <input type="hidden" name="ine_frente_actual" id="ine_frente_actual">
+                                        </div>
+                                        <img src="" width="135px" height="80px" id="ine_frentemuestra">
+                                    </div>  
                                 </div>
-                                <img src="" width="135px" height="100px" id="inefrentemuestra">
-                            </div>                            
-                            <!-- ENTRADA PARA REVERSO INE -->
-                            <div class="form-group">
-                                <label for="ine_reverso">Subir Reverso del INE</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control" name="ine_reverso" id="ine_reverso">
-                                    <input type="hidden" name="ine_reverso_actual" id="ine_reverso_actual">
+                                <div class="col-6">
+                                     <!-- ENTRADA PARA REVERSO INE -->
+                                    <div class="form-group">
+                                        <label for="ine_reverso">Subir Reverso del INE</label>
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" name="ine_reverso" id="ine_reverso">
+                                            <input type="hidden" name="ine_reverso_actual" id="ine_reverso_actual">
+                                        </div>
+                                        <img src="" width="135px" height="80px" id="ine_reversomuestra">
+                                    </div>
                                 </div>
-                                <img src="" width="135px" height="100px" id="inereversomuestra">
                             </div>
                             <!-- BOTONERA -->
                             <div class="card-footer">
                                 <div class="row text-center">
-                                    <div class="col-sm-6">
+                                    <div class="col-6">
                                         <button type="button" class="btn btn-danger pull-left btn-md" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-6">
                                         <button type="submit" class="btn btn-success btn-md" id="btnGuardar"><i class="fa fa-save"></i> Guardar gasto</button>
                                     </div>
                                 </div>                         

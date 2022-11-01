@@ -31,7 +31,7 @@ switch ($_GET["op"]){
 
         if(!file_exists($_FILES['ine_frente']['tmp_name']) || !is_uploaded_file($_FILES['ine_frente']['tmp_name'])){
 
-            $ine_frente = $_POST["ine_frenteactual"];
+            $ine_frente = $_POST["ine_frente_actual"];
 
         }else{
 
@@ -41,7 +41,7 @@ switch ($_GET["op"]){
                $_FILES['ine_frente']['type']=="image/jpeg"|| 
                $_FILES['ine_frente']['type']=="image/png"){
 
-                $ine_frente = 'vistas/img/empleados/ine/ine '.round(microtime(true)). ' frente.' . end($ext);
+                $ine_frente = 'vistas/img/empleados/'.$_POST["nombre"].round(microtime(true)). ' frente.' . end($ext);
                 move_uploaded_file($_FILES['ine_frente']['tmp_name'],"../".$ine_frente);
             }
 
@@ -51,7 +51,7 @@ switch ($_GET["op"]){
 
         if(!file_exists($_FILES['ine_reverso']['tmp_name']) || !is_uploaded_file($_FILES['ine_reverso']['tmp_name'])){
 
-            $ine_reverso = $_POST["ine_reversoactual"];
+            $ine_reverso = $_POST["ine_reverso_actual"];
 
         }else{
 
@@ -61,7 +61,7 @@ switch ($_GET["op"]){
                $_FILES['ine_reverso']['type']=="image/jpeg"|| 
                $_FILES['ine_reverso']['type']=="image/png"){
 
-                $ine_reverso = 'vistas/img/empleados/ine/ine '.round(microtime(true)). ' reverso.' . end($ext);
+                $ine_reverso = 'vistas/img/empleados/'.$_POST["nombre"].round(microtime(true)). ' reverso.' . end($ext);
                 move_uploaded_file($_FILES['ine_reverso']['tmp_name'],"../".$ine_reverso);
             }
 
@@ -81,7 +81,7 @@ switch ($_GET["op"]){
                $_FILES['foto']['type']=="image/jpeg"|| 
                $_FILES['foto']['type']=="image/png"){
 
-                $foto = 'vistas/img/empleados/foto/'.round(microtime(true)). '.' . end($ext);
+                $foto = 'vistas/img/empleados/'.$_POST["nombre"].round(microtime(true)). '.' . end($ext);
                 move_uploaded_file($_FILES['foto']['tmp_name'],"../".$foto);
             }
 

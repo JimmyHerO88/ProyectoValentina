@@ -64,10 +64,10 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row text-center">
-                                    <div class="col-sm-6">
+                                    <div class="col-6">
                                         <button type="button" class="btn btn-danger pull-left btn-md" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-6">
                                         <button type="submit" class="btn btn-success btn-md" id="btnGuardar"><i class="fa fa-save"></i> Guardar gasto</button>
                                     </div>
                                 </div>                         

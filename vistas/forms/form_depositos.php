@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group col-4">
                                     <div class="text-center"><label>Denominación</label></div>
                                     <input type="number" style="max-width: 150px;" disabled="disabled" id="deno1" value="1000">
                                     <input type="number" style="max-width: 150px;" disabled="disabled" id="deno2" value="500">
@@ -63,17 +63,17 @@
                                     <input type="number" style="max-width: 150px;" disabled="disabled" id="deno6" value="20">  
                                     <input type="number" style="max-width: 150px;" disabled="disabled" id="deno7" value="1">
                                 </div>
-                                <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group col-4">
                                     <div class="text-center"><label>Cantidad</label></div>
-                                    <input type="number" style="max-width: 150px;" id="cant1" name="cant1" value="0">
-                                    <input type="number" style="max-width: 150px;" id="cant2" name="cant2" value="0">
-                                    <input type="number" style="max-width: 150px;" id="cant3" name="cant3" value="0">
-                                    <input type="number" style="max-width: 150px;" id="cant4" name="cant4" value="0">
-                                    <input type="number" style="max-width: 150px;" id="cant5" name="cant5" value="0">
-                                    <input type="number" style="max-width: 150px;" id="cant6" name="cant6" value="0">
-                                    <input type="number" style="max-width: 150px;" step="0.01" id="cant7"  name="cant7" value="0">
+                                    <input type="number" style="max-width: 150px;" id="cant1" name="cant1" required>
+                                    <input type="number" style="max-width: 150px;" id="cant2" name="cant2" required>
+                                    <input type="number" style="max-width: 150px;" id="cant3" name="cant3" required>
+                                    <input type="number" style="max-width: 150px;" id="cant4" name="cant4" required>
+                                    <input type="number" style="max-width: 150px;" id="cant5" name="cant5" required>
+                                    <input type="number" style="max-width: 150px;" id="cant6" name="cant6" required>
+                                    <input type="number" style="max-width: 150px;" step="0.01" id="cant7"  name="cant7" required>
                                 </div>
-                                <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group col-4">
                                     <div class="text-center"><label>Importe</label></div>
                                     <output style="width: 150px; font-size: 20px; text-align: right" id="resultado1" name="resultado1"  for="deno1 cant1"></output>
                                     <output style="width: 150px; font-size: 20px; text-align: right" id="resultado2" name="resultado2"  for="deno2 cant2"></output>
@@ -95,10 +95,10 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row text-center">
-                                    <div class="col-sm-6">
+                                    <div class="col-6">
                                         <button type="button" class="btn btn-danger pull-left btn-md" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-6">
                                         <button type="submit" class="btn btn-success btn-md" id="btnGuardar"><i class="fa fa-save"></i> Guardar depósito</button>
                                     </div>
                                 </div>                         

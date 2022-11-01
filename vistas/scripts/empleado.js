@@ -116,7 +116,13 @@ function guardaryeditar(e){
         processData: false,
 
         success: function(datos){
-            bootbox.alert(datos);
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -150,11 +156,11 @@ function mostrar(idempleado){
 		
 		$("#ine_frentemuestra").show();
 		$("#ine_frentemuestra").attr("src","../"+data.ine_frente);
-		$("#ine_frenteactual").val(data.ine_frente);
+		$("#ine_frente_actual").val(data.ine_frente);
 		
 		$("#ine_reversomuestra").show();
 		$("#ine_reversomuestra").attr("src","../"+data.ine_reverso);
-		$("#ine_reversoactual").val(data.ine_reverso);
+		$("#ine_reverso_actual").val(data.ine_reverso);
 
 		$("#tel_1").val(data.tel_1);
 		$("#tel_2").val(data.tel_2);
@@ -193,23 +199,32 @@ function activar(idempleado){
     //})
 }
 
-//FUNCION DESACTIVAR
+//FUNCION eliminar
 function eliminar(idempleado){
 
-    bootbox.confirm("¿Está seguro de eliminar este empleado?",function(result){
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/empleado.ajax.php?op=eliminar", {idempleado : idempleado}, function(e){
 
-        if(result){
-
-            $.post("../ajax/empleado.ajax.php?op=eliminar", {idempleado:idempleado}, function(e){
-
-                bootbox.alert(e);
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
                 tabla.ajax.reload();
 
             });
-
+          
         }
-        
-    })
+      })
 
 }
 
