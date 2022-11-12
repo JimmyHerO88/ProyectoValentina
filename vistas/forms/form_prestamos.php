@@ -6,7 +6,7 @@
             <div class=" col-lg-4 col-md-8">
                 <div class="card card-warning">
                     <div class="card-header">
-                        <h3 class="card-title">Ingresar o actualizar Gasto</h3>
+                        <h3 class="card-title">Ingresar o actualizar Préstamos</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -23,7 +23,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    <input type="date" class="form-control input-lg" name="fecha" value="<?php echo date("Y-m-d")?>">
+                                    <input type="date" class="form-control input-lg"  name="fecha" id="fecha" value="<?php echo date("Y-m-d")?>">
                                 </div>
                             </div>
                             <div class="form-group">

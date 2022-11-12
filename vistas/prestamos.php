@@ -8,7 +8,7 @@
   
   require 'header.php';
 
-  if ($_SESSION['nomina'] == 1){
+  if ($_SESSION['corte_caja']==1){
 
 ?>
 <!--Contenido-->
@@ -20,27 +20,20 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                      <h1 class="box-title">Empleados
+                      <h1 class="box-title">Préstamos
                         <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
                       </h1>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                      <table class="table table-striped table-bordered table-condensed table-hover dt-responsive" id="tbllistado">
+                      <table class="table table-striped table-bordered table-condensed table-hover" id="tbllistado">
                           <thead>
                             <th>Opciones</th>
-                            <th>Num Empleado</th>
-                            <th>Nombre</th>
-                            <th>Sueldo X Dia</th>
-                            <th>Domicilio</th>
-                            <th>Fecha Nacimiento</th>
-                            <th>Fecha Contratación</th>
-                            <th>Foto</th>
-                            <th>INE Frente</th>
-                            <th>INE Reverso</th>
-                            <th>Teléfonos</th>
-                            <th>Status</th>
+                            <th>Fecha</th>
+                            <th>Empleado</th>
+                            <th>Tipo</th>
+                            <th>Importe</th>
                           </thead>
 
                           <tbody>
@@ -49,24 +42,17 @@
 
                           <tfoot>
                             <th>Opciones</th>
-                            <th>Num Empleado</th>
-                            <th>Nombre</th>
-                            <th>Sueldo X Dia</th>
-                            <th>Domicilio</th>
-                            <th>Fecha Nacimiento</th>
-                            <th>Fecha Contratación</th>
-                            <th>Foto</th>
-                            <th>INE Frente</th>
-                            <th>INE Reverso</th>
-                            <th>Teléfonos</th>
-                            <th>Status</th>
+                            <th>Fecha</th>
+                            <th>Empleado</th>
+                            <th>Tipo</th>
+                            <th>Importe</th>
                           </tfoot>
                         </table>
                     </div>
                     <!-- general form elements -->
                     <?php
 
-                      require 'forms/form_empleados.php';
+                      require 'forms/form_prestamos.php';
 
                     ?>
                   <!--Fin centro -->
@@ -87,7 +73,7 @@
 
 ?>
 
-<script type="text/javascript" src="scripts/empleado.js"></script>
+<script type="text/javascript" src="scripts/deposito.js"></script>
 
 <?php
 }

@@ -27,7 +27,7 @@
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                      <table class="table table-striped table-bordered table-condensed table-hover" id="tbllistado">
+                      <table class="table table-striped table-bordered table-condensed table-hover dt-responsive" id="tbllistado">
                           <thead>
                             <th>Opciones</th>
                             <th>Fecha</th>

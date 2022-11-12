@@ -16,13 +16,12 @@
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="../public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-   
+    <link rel="stylesheet" href="../public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">   
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Theme style -->
     <link rel="stylesheet" href="../public/dist/css/adminlte.css">
+    <link rel="stylesheet" href="../public/dist/css/responsive.bootstrap.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -69,44 +68,6 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <?php
-        if($_SESSION['corte_caja'] == 1){
-      ?>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="forms/form_depositos.php" class="nav-link">Depósitos</a>
-      </li>
-      
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="gastos" class="nav-link">Gastos</a>
-      </li>
-      <?php
-        }
-      ?>
-      <?php
-        if($_SESSION['nomina'] == 1){
-      ?>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Préstamos</a>
-      </li>
-      
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Adelantos</a>
-      </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Nómina</a>
-      </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Notas</a>
-      </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Clientes</a>
-      </li>
-      <?php
-        }
-      ?>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -216,7 +177,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="pages/charts/chartjs.html" class="nav-link">
+                        <a href="resumen.php" class="nav-link">
                           <i class="far fas fa-th-large nav-icon"></i>
                           <p>Resumen</p>
                         </a>
@@ -234,19 +195,19 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="" class="nav-link">
                           <i class="far fas fa-sticky-note nav-icon"></i>
                           <p>Registro de notas</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="" class="nav-link">
                           <i class="far fas fa-handshake nav-icon"></i>
                           <p>Liquidaciones</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="" class="nav-link">
                           <i class="far fas fa-user-tie nav-icon"></i>
                           <p>Pago a Proveedores</p>
                         </a>
@@ -274,31 +235,31 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="prestamos.php" class="nav-link">
                           <i class="fas fa-money-check-alt nav-icon"></i>
                           <p>Préstamos</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="" class="nav-link">
                           <i class="far fas fa-file-invoice-dollar nav-icon"></i>
                           <p>Adelantos de nómina</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="" class="nav-link">
                           <i class="fas fa-money-check nav-icon"></i>
                           <p>Abonos</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="" class="nav-link">
                           <i class="far fas fa-envelope-open nav-icon"></i>
                           <p>Prenómina</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="" class="nav-link">
                           <i class="far fas fa-archive nav-icon"></i>
                           <p>Nómina General</p>
                         </a>

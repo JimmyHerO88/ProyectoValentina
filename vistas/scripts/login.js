@@ -10,7 +10,7 @@ $("#frmAcceso").on('submit',function(e)
     {
         if (data!="null")
         {
-            $(location).attr("href","gastos.php");            
+            $(location).attr("href","resumen.php");            
         }
         else
         {
