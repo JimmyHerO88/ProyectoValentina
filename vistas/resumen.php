@@ -492,6 +492,9 @@ if(!isset($_SESSION["nombre"])){
       <!-- vale de caja -->
       <div id="vale_caja"></div>
 
+      <!-- vale de caja -->
+      <div id="vale_deposito"></div>
+
       <!-- MODAL -->
       <?php
         require 'modal/modal_gastos.php';

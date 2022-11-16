@@ -1,14 +1,14 @@
 <div class="modal fade" id="modal-depositos">
     <div class="modal-dialog">
-        <div class="modal-conten">
-            <form role= "form" method="post" enctype="multipart/form-data" id="modal_depositos"  oninput="resultado1.value=parseFloat(deno1.value)*parseFloat(cant1.value)
-                resultado2.value=parseFloat(deno2.value)*parseFloat(cant2.value)
-                resultado3.value=parseFloat(deno3.value)*parseFloat(cant3.value)
-                resultado4.value=parseFloat(deno4.value)*parseFloat(cant4.value)
-                resultado5.value=parseFloat(deno5.value)*parseFloat(cant5.value)
-                resultado6.value=parseFloat(deno6.value)*parseFloat(cant6.value)
-                resultado7.value=parseFloat(deno7.value)*parseFloat(cant7.value)
-                importe.value=parseFloat(resultado1.value)+parseFloat(resultado2.value)+parseFloat(resultado3.value)+parseFloat(resultado4.value)+parseFloat(resultado5.value)+parseFloat(resultado6.value)+parseFloat(resultado7.value)">
+        <div class="modal-content">
+            <form role="form" method="post" enctype="multipart/form-data" id="modal_depositos" oninput="resultado1.value=parseFloat(deno1.value)*parseFloat(cant1.value)
+                                resultado2.value=parseFloat(deno2.value)*parseFloat(cant2.value)
+                                resultado3.value=parseFloat(deno3.value)*parseFloat(cant3.value)
+                                resultado4.value=parseFloat(deno4.value)*parseFloat(cant4.value)
+                                resultado5.value=parseFloat(deno5.value)*parseFloat(cant5.value)
+                                resultado6.value=parseFloat(deno6.value)*parseFloat(cant6.value)
+                                resultado7.value=parseFloat(deno7.value)*parseFloat(cant7.value)
+                                importe.value=parseFloat(resultado1.value)+parseFloat(resultado2.value)+parseFloat(resultado3.value)+parseFloat(resultado4.value)+parseFloat(resultado5.value)+parseFloat(resultado6.value)+parseFloat(resultado7.value)">
                 <div class="modal-header" style="background-color: #ffc107">
                     <h4 class="modal-title">Depósitos</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -27,14 +27,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <input type="date" class="form-control input-lg" name="fecha" value="<?php echo date("Y-m-d")?>">
+                            <input type="date" class="form-control input-lg" id="fecha_depo" name="fecha" value="<?php echo date("Y-m-d")?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Tipo de depósito</label>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                            <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>
+                            <select id="tipo_depo" name="tipo" class="form-control select2" style="width: 100%;" required>
                             <option value="DEPÓSITO">DEPÓSITO</option>
                             <option value="TARJETA">TARJETA</option>
                             <option value="TRANSFERENCIA BANCARIA">TRANSFERENCIA BANCARIA</option>
@@ -88,13 +88,18 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                             </div>
-                            <input type="number" step="any" class="form-control input-lg" name="importe" id="importe" placeholder="Importe" required>
+                            <input type="number" step="any" class="form-control input-lg" name="importe" id="importe_depo" placeholder="Importe" required>
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <div class="input-group ">
+                        <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>">
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger pull-left btn-md" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button type="submit" class="btn btn-success btn-md" id="btnGuardar"><i class="fa fa-save"></i> Guardar depósito</button> 
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger pull-left btn-md" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-md" id="btnGuardarDeposito"><i class="fa fa-save"></i> Guardar depósito</button>
+                    </div>
                 </div>
             </form>
         </div>

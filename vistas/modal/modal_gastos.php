@@ -62,7 +62,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-danger pull-left btn-md" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                <button type="submit" class="btn btn-success btn-md" id="btnGuardar"><i class="fa fa-save"></i> Guardar gasto</button>
+                <button type="submit" class="btn btn-success btn-md" id="btnGuardarGasto"><i class="fa fa-save"></i> Guardar gasto</button>
             </div>
         </form>
         </div>
