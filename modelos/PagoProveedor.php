@@ -14,16 +14,16 @@ Class PagoProveedor{
     public function insertar($concepto, $importe, $fecha, $idusuario, $idsucursal){
 
         $sql = "INSERT INTO pago_proveedor (concepto, importe, fecha, idusuario, idsucursal)
-                VALUES ('$concepto', '$importe', '$fecha', '$idusuario', '$idsucursal')";
+                VALUES ('$concepto', '$importe', '$fecha', '$idusuario', 1)";
         
         return ejecutarConsulta($sql);
 
     }
 
     //Metodo para EDITAR registros
-    public function editar($idpagoproveedor, $concepto, $importe, $fecha){
+    public function editar($idpagoproveedor, $concepto, $importe, $fecha, $idusuario){
 
-        $sql = "UPDATE pago_proveedor SET concepto = '$concepto', importe = '$importe', fecha = '$fecha', idusuario = '$idusuario', idsucursal = '$idsucursal'
+        $sql = "UPDATE pago_proveedor SET concepto = '$concepto', importe = '$importe', fecha = '$fecha', idusuario = '$idusuario'
                 WHERE idpagoproveedor = '$idpagoproveedor'";
 
         return ejecutarConsulta($sql);

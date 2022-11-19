@@ -195,7 +195,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="registro_notas.php" class="nav-link">
                           <i class="far fas fa-sticky-note nav-icon"></i>
                           <p>Registro de notas</p>
                         </a>
@@ -207,7 +207,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="pagoproveedores.php" class="nav-link">
                           <i class="far fas fa-user-tie nav-icon"></i>
                           <p>Pago a Proveedores</p>
                         </a>

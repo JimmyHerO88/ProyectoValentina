@@ -6,7 +6,7 @@
             <div class=" col-lg-4 col-md-8">
                 <div class="card card-warning">
                     <div class="card-header">
-                        <h3 class="card-title">Ingresar o actualizar Gasto</h3>
+                        <h3 class="card-title">Pago a Proveedores</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="input-group ">
-                                    <input type="hidden" class="form-control input-lg" name="idgasto" id="idgasto">
+                                    <input type="hidden" class="form-control input-lg" name="idpagoproveedor" id="idpagoproveedor">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -27,21 +27,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Tpo de gasto</label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>
-                                        <option value="TIENDA" selected>TIENDA</option>
-                                        <option value="PERSONAL">PERSONAL</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                        <span class="input-group-text"><i class="far fas fa-user-tie nav-icon"></i></span>
                                     </div>
-                                    <input type="text" name="concepto" id="concepto" class="form-control input-lg" onkeyup="mayus(this);" maxlendth="120" placeholder="Concepto" required>
+                                    <input type="text" name="concepto" id="concepto" class="form-control input-lg" onkeyup="mayus(this);" maxlendth="120" placeholder="Proveedor" required>
                                 </div>
                             </div>
                             <div class="form-group">

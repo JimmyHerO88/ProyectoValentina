@@ -22,7 +22,7 @@ switch ($_GET["op"]){
 
         }else{
 
-            $rspta = $pagoproveedor->editar($idpagoproveedor, $concepto, $importe, $fecha, $idusuario, $idsucursal);
+            $rspta = $pagoproveedor->editar($idpagoproveedor, $concepto, $importe, $fecha, $idusuario);
             echo $rspta ? "El pago se ha modificado correctamente" : "El pago no se pudo modificar";
 
         }
@@ -45,7 +45,7 @@ switch ($_GET["op"]){
 
         while ($reg=$rspta->fetch_object()){
             $data[] = array(
-                            "0" =>'<button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idpagoproveedor.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
+                            "0" =>'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idpagoproveedor.')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idpagoproveedor.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
                             "1" => $reg->fecha,
                             "2" => $reg->concepto,
                             "3" => '$ '.number_format($reg->importe,2)

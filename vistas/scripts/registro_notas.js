@@ -111,7 +111,13 @@ function guardaryeditar(e){
         processData: false,
 
         success: function(datos){
-            bootbox.alert(datos);
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -134,11 +140,9 @@ function mostrar(idnota){
         $("#fecha").val(data.fecha);
         $("#rango_folios").val(data.rango_folios);
         $("#concepto").val(data.concepto);
-        $("#concepto").selectpicker('refresh');
         $("#total").val(data.total);
         $("#cliente").val(data.cliente);
         $("#tipo_pago").val(data.tipo_pago);
-        $("#tipo_pago").selectpicker('refresh');
         $("#observaciones").val(data.observaciones);
         $("#idusuario").val(data.idusuario);
 
@@ -148,20 +152,29 @@ function mostrar(idnota){
 //FUNCION DESACTIVAR
 function eliminar(idnota){
 
-    bootbox.confirm("¿Está seguro de eliminar este registro de notas?",function(result){
-      
-        if(result){
-
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
             $.post("../ajax/registro_notas.ajax.php?op=eliminar", {idnota : idnota}, function(e){
 
-                bootbox.alert(e);
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
                 tabla.ajax.reload();
 
             });
-
+          
         }
-
-    })
+      })
 
 }
 

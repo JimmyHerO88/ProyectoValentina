@@ -48,7 +48,7 @@ switch ($_GET["op"]){
 
         while ($reg=$rspta->fetch_object()){
             $data[] = array(
-                            "0" =>'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idnota.')"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            "0" =>'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idnota.')"><i class="fas fa-edit" aria-hidden="true"></i></button>
                             <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idnota.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
                             "1" => $reg->fecha,
                             "2" => $reg->rango_folios,

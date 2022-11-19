@@ -44,13 +44,19 @@ function init(){
 
     $("#modal_gastos").on("submit", function(e){
 
-        guardaryEditarGasto(e);
+        guardarGasto(e);
         
     });
 
     $("#modal_depositos").on("submit", function(e){
 
-        guardaryEditarDeposito(e);
+        guardarDeposito(e);
+        
+    });
+    
+    $("#modal_notas").on("submit", function(e){
+
+        guardarNota(e);
         
     });
 
@@ -62,7 +68,7 @@ function mayus(e) {
 }
 
 //FUNCION PARA GUARDAR Y EDITAR
-function guardaryEditarGasto(e){
+function guardarGasto(e){
     
 
     e.preventDefault();//No se activará la acción predeterminada del evento
@@ -97,7 +103,7 @@ function guardaryEditarGasto(e){
         <p style="font-size: 80px;">***********************************************************</p>
         <h2 class="text-center" style="font-size: 180px;" id="concepto_vale"><span><strong>${concepto.value}</strong></span></h2>
         <p style="font-size: 80px;">***********************************************************</p>
-        <h4 class="text-center" style="font-size: 80px;"><strong>FIRMA DE RECIBIDO</strong></h4><br><br><br>
+        <h4 class="text-center" style="font-size: 80px;"><strong>FIRMA DE RECIBIDO</strong></h4><br>
         <p class="text-center" style="font-size: 80px; "><br><br><br>_________________________________________________</p>
         </div>`;
 
@@ -111,7 +117,7 @@ function guardaryEditarGasto(e){
 }
 
 //FUNCION PARA GUARDAR Y EDITAR
-function guardaryEditarDeposito(e){
+function guardarDeposito(e){
     
 
     e.preventDefault();//No se activará la acción predeterminada del evento
@@ -138,9 +144,8 @@ function guardaryEditarDeposito(e){
                                     <h1 class="text-center" style="font-size: 200px;"><strong>Creaciones Valentina</strong></h1>
                                     <h3 class="text-center" style="font-size: 150px;">Fecha: <strong>${fechaDepo.value}</strong></h3>
                                     <p style="font-size: 80px;">***********************************************************</p>
-                                    <p class="text-center" style="font-size: 200px;"><span><strong>${tipoDepo.value}</strong></span></p><br>
-                                    <p class="text-center" style="font-size: 150px;"><span><strong>${observacion.value}</strong></span></p><br>
-                                    <p style="font-size: 80px;">***********************************************************</p><br>
+                                    <p class="text-center" style="font-size: 200px;"><span><strong>${tipoDepo.value} ${observacion.value}</strong></span></p>
+                                    <p style="font-size: 80px;">***********************************************************</p>
                                     <table class="justify-content-center table table-sm">
                                     <thead>
                                         <tr>
@@ -157,27 +162,27 @@ function guardaryEditarDeposito(e){
                                         </tr>
                                         <tr>
                                             <td style="font-size: 80px; text-align:center;">$ 5000.00</td>
-                                            <td style="font-size: 80px; text-align:center;">${cant1.value}</td>
+                                            <td style="font-size: 80px; text-align:center;">${cant2.value}</td>
                                             <td style="font-size: 80px; text-align:center;">$ ${formatoMexico(resultado2.value)}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 80px; text-align:center;">$ 200.00</td>
-                                            <td style="font-size: 80px; text-align:center;">${cant2.value}</td>
+                                            <td style="font-size: 80px; text-align:center;">${cant3.value}</td>
                                             <td style="font-size: 80px; text-align:center;">$ ${formatoMexico(resultado3.value)}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 80px; text-align:center;">$ 100.00</td>
-                                            <td style="font-size: 80px; text-align:center;">${cant3.value}</td>
+                                            <td style="font-size: 80px; text-align:center;">${cant4.value}</td>
                                             <td style="font-size: 80px; text-align:center;">$ ${formatoMexico(resultado4.value)}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 80px; text-align:center;">$ 50.00</td>
-                                            <td style="font-size: 80px; text-align:center;">${cant4.value}</td>
+                                            <td style="font-size: 80px; text-align:center;">${cant5.value}</td>
                                             <td style="font-size: 80px; text-align:center;">$ ${formatoMexico(resultado5.value)}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 80px; text-align:center;">$ 20.00</td>
-                                            <td style="font-size: 80px; text-align:center;">${cant5.value}</td>
+                                            <td style="font-size: 80px; text-align:center;">${cant6.value}</td>
                                             <td style="font-size: 80px; text-align:center;">$ ${formatoMexico(resultado6.value)}</td>
                                         </tr>
                                         <tr>
@@ -187,11 +192,11 @@ function guardaryEditarDeposito(e){
                                         </tr>
                                     </tbody>
                                     </table>
-                                    <p style="font-size: 80px;">***********************************************************</p><br>
-                                    <p class="text-center" style="font-size: 300px;"><span><strong>$ ${formatoMexico(importeDepo.value)}</strong></span></p><br>
-                                    <p style="font-size: 80px;">***********************************************************</p><br>
-                                    <h4 class="text-center" style="font-size: 80px;"><strong>FIRMA DE RECIBIDO</strong></h4><br><br><br>
-                                    <p class="text-center" style="font-size: 80px; "><br><br><br>_________________________________________________</p>
+                                    <p style="font-size: 80px;">**********************************************************</p>
+                                    <p class="text-center" style="font-size: 350px;"><span><strong>$ ${formatoMexico(importeDepo.value)}</strong></span></p>
+                                    <p style="font-size: 80px;">***********************************************************</p>
+                                    <h4 class="text-center" style="font-size: 80px;"><strong>FIRMA DE RECIBIDO</strong></h4>
+                                    <p class="text-center" style="font-size: 60px; "><br><br><br><br>_________________________________________________</p>
                                 </div>`;
 
         setTimeout(() => {
@@ -200,6 +205,40 @@ function guardaryEditarDeposito(e){
                     window.location.reload();
             }, "800");
         }, "1500");
+
+}
+
+//FUNCION PARA GUARDAR Y EDITAR
+function guardarNota(e){
+
+    e.preventDefault();//No se activará la acción predeterminada del evento
+    $("#btnGuardarNota").prop("disabled", true);
+    var formData = new FormData($("#modal_notas")[0]);
+
+    $.ajax({
+
+        url: "../ajax/registro_notas.ajax.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+
+        success: function(datos){
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+            setTimeout(() => {
+                window.location.reload();
+            }, "800");
+        }
+
+    });
+
+    
 
 }
 

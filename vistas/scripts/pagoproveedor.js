@@ -110,7 +110,13 @@ function guardaryeditar(e){
         processData: false,
 
         success: function(datos){
-            bootbox.alert(datos);
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -134,7 +140,6 @@ function mostrar(idpagoproveedor){
         $("#concepto").val(data.concepto);
         $("#importe").val(data.importe);
         $("#idusuario").val(data.idusuario);
-        $("#idsucursal").val(data.idsucursal);
 
     })
 }
@@ -142,19 +147,28 @@ function mostrar(idpagoproveedor){
 //FUNCION DESACTIVAR
 function eliminar(idpagoproveedor){
 
-    bootbox.confirm("¿Está seguro de eliminar este pago?",function(result){
-      
-        if(result){
-
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
             $.post("../ajax/pagoproveedor.ajax.php?op=eliminar", {idpagoproveedor : idpagoproveedor}, function(e){
 
-                bootbox.alert(e);
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
                 tabla.ajax.reload();
 
             });
-
+          
         }
-
     })
 
 }
