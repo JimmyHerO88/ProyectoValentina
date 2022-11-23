@@ -201,7 +201,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="liquidaciones.php" class="nav-link">
                           <i class="far fas fa-handshake nav-icon"></i>
                           <p>Liquidaciones</p>
                         </a>

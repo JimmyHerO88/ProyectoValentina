@@ -32,6 +32,8 @@ const resultado6 = document.getElementById('resultado6');
 const resultado7 = document.getElementById('resultado7');
 const observacion = document.getElementById('observacion');
 const importeDepo = document.getElementById('importe_depo');
+
+
 //FUNCION SEPARADOR DE MILES
 const formatoMexico = (number) => {
     const exp = /(\d)(?=(\d{3})+(?!\d))/g;
@@ -57,6 +59,18 @@ function init(){
     $("#modal_notas").on("submit", function(e){
 
         guardarNota(e);
+        
+    });
+    
+    $("#modal_proveedores").on("submit", function(e){
+
+        guardarProveedor(e);
+        
+    });
+
+    $("#modal_liquidaciones").on("submit", function(e){
+
+        guardarLiquidacion(e);
         
     });
 
@@ -208,7 +222,7 @@ function guardarDeposito(e){
 
 }
 
-//FUNCION PARA GUARDAR Y EDITAR
+//FUNCION PARA GUARDAR NOTAS
 function guardarNota(e){
 
     e.preventDefault();//No se activará la acción predeterminada del evento
@@ -236,12 +250,73 @@ function guardarNota(e){
             }, "800");
         }
 
-    });
-
-    
+    });    
 
 }
 
+//FUNCION PARA GUARDAR PAGO A PROVEEDORES
+function guardarProveedor(e){
+
+    e.preventDefault();//No se activará la acción predeterminada del evento
+    $("#btnGuardarProveedor").prop("disabled", true);
+    var formData = new FormData($("#modal_proveedores")[0]);
+
+    $.ajax({
+
+        url: "../ajax/pagoproveedor.ajax.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+
+        success: function(datos){
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, "800");
+        }
+
+    });
+
+}
+
+//FUNCION PARA GUARDAR LIQUIDACIONES
+function guardarLiquidacion(e){
+
+    e.preventDefault();//No se activará la acción predeterminada del evento
+    $("#btnGuardarLiquidacion").prop("disabled", true);
+    var formData = new FormData($("#modal_liquidaciones")[0]);
+
+    $.ajax({
+
+        url: "../ajax/liquidacion.ajax.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+
+        success: function(datos){
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, "800");
+        }
+
+    });
+
+}
 function imprimeCuadrante() {
     botones.style.display = "none";
     resumen.style.display = "none";

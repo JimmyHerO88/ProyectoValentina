@@ -21,7 +21,7 @@ Class Liquidacion{
     }
 
     //Metodo para EDITAR registros
-    public function editar($idliquidacion, $concepto, $importe, $fecha){
+    public function editar($idliquidacion, $concepto, $importe, $fecha, $idusuario, $idsucursal){
 
         $sql = "UPDATE liquidaciones SET concepto = '$concepto', importe = '$importe', fecha = '$fecha', idusuario = '$idusuario', idsucursal = '$idsucursal'
                 WHERE idliquidacion = '$idliquidacion'";

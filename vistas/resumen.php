@@ -237,7 +237,7 @@ if(!isset($_SESSION["nombre"])){
                   $t_tarjeta = $total_tarjeta[0];
                 }
 
-      $sql160 = "SELECT SUM(importe) FROM deposito WHERE tipo = 'TRANSFERENCIA' and fecha = '".$filtro."'";
+      $sql160 = "SELECT SUM(importe) FROM deposito WHERE tipo like 'TRANSF%' and fecha = '".$filtro."'";
                 $sentencia160 = $pdo->prepare($sql160);
                 $sentencia160->execute();
                 $total_transf = $sentencia160->fetch(); 
@@ -281,8 +281,8 @@ if(!isset($_SESSION["nombre"])){
                   <button type="button" class="btn btn-warning m-1" style="width: 130px" data-toggle="modal" data-target="#modal-depositos">Depósitos</button>
                   <button type="button" class="btn btn-warning m-1" style="width: 130px" data-toggle="modal" data-target="#modal-gastos">Gastos</button>
                   <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-notas">Notas</button>
-                  <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#">Liquidaciones</button>
-                  <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#">Proveedores</button>
+                  <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-liquidaciones">Liquidaciones</button>
+                  <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-proveedores">Proveedores</button>
                   <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#">Préstamos</button>
                   <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#">Adelantos</button>
                   <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#">Prenómina</button>
@@ -489,15 +489,26 @@ if(!isset($_SESSION["nombre"])){
                   </div>
                   <div class="col-12">
                     <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>LIQUIDACIONES $ <?php echo number_format($t_liquidaciones,2);?></strong></h5>
-                    <p style="font-size: 20px"><strong>
+                    <p style="font-size: 40px"><strong>
+                      ****************************************************************<br>
                     Venta Real: $ <?php echo number_format($Total_VENTA,2);?><br>
-                    Gastos: $ <?php echo number_format($t_gastos_personales,2);?><br>
-                    Pagos con Tarjeta: $ <?php echo number_format($t_tarjeta,2);?><br>
+                      ****************************************************************</p>
+                    
+                    <p class="text-success" style="font-size: 30px">Pagos con Tarjeta: $ <?php echo number_format($t_tarjeta,2);?><br>
                     Depósitos: $ <?php echo number_format($t_depositos,2);?><br>
                     Facturas: $ <?php echo number_format($t_facturas,2);?><br>
-                    Transferencias: $ <?php echo number_format($t_transferencias,2);?><br>
-                    Diferencia: $ <?php echo number_format($Diferencia,2);?><br>
-                    </strong></p>
+                    Transferencias: $ <?php echo number_format($t_transferencias,2);?>
+                    
+                    </p>
+                    <p class="text-danger" style="font-size: 30px">Gastos: $ <?php echo number_format($t_gastos_personales,2);?></p>
+                    <p style="font-size: 40px">****************************************************************</p>
+                    <?php if($Diferencia > 0){ ?>
+                        <p class="text-success" style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>;
+                    <?php }else if($Diferencia < 0){ ?>
+                        <p class="text-danger" style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>;
+                    <?php }else{ ?>
+                        <p style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>;
+                    <?php } ?>
                   </div>
                 </div> 
               </section>  
@@ -516,7 +527,9 @@ if(!isset($_SESSION["nombre"])){
       <?php
         require 'modal/modal_gastos.php';
         require 'modal/modal_depositos.php';
+        require 'modal/modal_proveedores.php';
         require 'modal/modal_registro_notas.php';
+        require 'modal/modal_liquidaciones.php';
       ?>
 
 <?php

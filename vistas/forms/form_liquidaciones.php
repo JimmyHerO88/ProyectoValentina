@@ -6,14 +6,15 @@
             <div class=" col-lg-4 col-md-8">
                 <div class="card card-warning">
                     <div class="card-header">
-                        <h3 class="card-title">Ingresar o actualizar Notas</h3>
+                        <h3 class="card-title">Liquidaciones</h3>
                     </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
                     <form name="formulario" id="formulario" method="POST">
-
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="input-group ">
-                                    <input type="hidden" class="form-control input-lg" name="idnota" id="idnota">
+                                    <input type="hidden" class="form-control input-lg" name="idliquidacion" id="idliquidacion">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -28,58 +29,17 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-file-invoice"></i></span>
                                     </div>
-                                    <input type="text" class="form-control input-lg" onkeyup="mayus(this);" name="rango_folios" id="rango_folios" maxlendth="20" placeholder="Folios" required>
+                                    <input type="text" name="concepto" id="concepto" class="form-control input-lg" onkeyup="mayus(this);" maxlendth="120" placeholder="Concepto" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Concepto</label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select id="concepto" name="concepto" class="form-control select2" style="width: 100%;" required>
-                                    <option value="NOTAS FORÁNEAS">NOTAS FORÁNEAS</option>
-                                    <option value="NOTAS REMISIÓN">NOTAS REMISIÓN</option>
-                                    <option value="NOTAS PEDIDOS">NOTAS PEDIDOS</option>
-                                    <option value="TICKETS FISCALES">TICKETS FISCALES</option>
-                                    <option value="TICKETS REMISONES">TICKETS REMISONES</option>
-                                    </select>
-                                </div>
-                            </div>                         
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                     </div>
-                                    <input type="number" step="any" class="form-control input-lg" name="total" id="total" maxlendth="120" placeholder="Importe total" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-male"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control input-lg" onkeyup="mayus(this);" name="cliente" id="cliente" maxlendth="20" placeholder="Cliente">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Tipo de Pago</label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-search-dollar"></i></span>
-                                    <select id="tipo_pago" name="tipo_pago" class="form-control select2" style="width: 100%;">
-                                    <option value="EFECTIVO">EFECTIVO</option>
-                                    <option value="TARJETA">TARJETA</option>
-                                    <option value="TRANSFERENCIA">TRANSFERENCIA</option>
-                                    <option value="DEPÓSITO">DEPÓSITO</option>
-                                    </select>
-                                </div>
-                            </div> 
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-sticky-note"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control input-lg" onkeyup="mayus(this);" name="observaciones" id="observaciones" maxlendth="20" placeholder="Observaciones">
+                                    <input type="number" step="any" class="form-control input-lg" name="importe" id="importe" maxlendth="120" placeholder="Importe" required>
                                 </div>
                             </div>
                             <div class="form-group">
