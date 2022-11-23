@@ -308,7 +308,7 @@ if(!isset($_SESSION["nombre"])){
                   <div class="row">
                     <div class="col-6" style="border-right: 5px solid;">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>NÓMINA</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center" style="width:90%">
+                      <table class="justify-content-center table table-striped table-sm text-center" >
                         <tbody>
                         <?php foreach($g_nomina as $nomina): ?>
                             <tr>
@@ -322,7 +322,7 @@ if(!isset($_SESSION["nombre"])){
                     </div>
                     <div class="col-6">
                       <h5 style="border-style: solid; border-width: 3px;" class="text-center"><strong>PROVEEDORES</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center" style="width:90%">
+                      <table class="justify-content-center table table-striped table-sm text-center" >
                         <tbody>
                         <?php foreach($g_prov as $prov): ?>
                             <tr>
@@ -338,7 +338,7 @@ if(!isset($_SESSION["nombre"])){
                   <div class="row">
                     <div class="col-6" style="border-right: 5px solid; border-top: 5px solid; padding-top: 15px;">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>GASTOS TIENDA</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  style="width:90%">
+                      <table class="justify-content-center table table-striped table-sm text-center"  >
                         <tbody>
                         <?php foreach($g_tienda as $tienda): ?>
                             <tr>
@@ -350,7 +350,7 @@ if(!isset($_SESSION["nombre"])){
                       </table>
                       <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_gastos_tienda,2);?></strong></p>
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>GASTOS PERSONALES</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  style="width:90%">
+                      <table class="justify-content-center table table-striped table-sm text-center"  >
                         <tbody>
                         <?php foreach($g_personal as $personal): ?>
                             <tr>
@@ -364,7 +364,7 @@ if(!isset($_SESSION["nombre"])){
                     </div>
                     <div class="col-6" style="border-top: 5px solid; padding-top: 15px;">
                       <h5 style="border-style: solid; border-width: 3px;" class="text-center"><strong>DEPÓSITOS</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  style="width:90%">
+                      <table class="justify-content-center table table-striped table-sm text-center"  >
                         <tbody>
                         <?php foreach($listado_depos as $depos): ?>
                             <tr>
@@ -376,7 +376,7 @@ if(!isset($_SESSION["nombre"])){
                       </table>
                       <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_depositos,2);?></strong></p>
                       <h5 style="border-style: solid; border-width: 3px;" class="text-center"><strong>LIQUIDACIONES</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  style="width:90%">
+                      <table class="justify-content-center table table-striped table-sm text-center"  >
                         <tbody>
                         <?php foreach($liquidaciones as $liq): ?>
                             <tr>
