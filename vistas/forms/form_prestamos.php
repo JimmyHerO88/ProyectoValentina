@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="input-group ">
-                                    <input type="hidden" class="form-control input-lg" name="idgasto" id="idgasto">
+                                    <input type="hidden" class="form-control input-lg" name="idprestamo" id="idprestamo">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -27,21 +27,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Tpo de gasto</label>
+                                <label>Empleado</label>
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>
-                                        <option value="TIENDA" selected>TIENDA</option>
-                                        <option value="PERSONAL">PERSONAL</option>
-                                    </select>
+                                    <span class="input-group-text"><i class="far fas fa-user-tag nav-icon"></i></span>
+                                    <select name="idempleado" id="idempleado" class="form-control selectpicker" data-live-search="true" required>  </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
-                                    </div>
-                                    <input type="text" name="concepto" id="concepto" class="form-control input-lg" onkeyup="mayus(this);" maxlendth="120" placeholder="Concepto" required>
+                                <label>Tipo</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-share-square"></i></span>
+                                    <select name="tipo" id="tipo" class="form-control selectpicker" data-live-search="true" required>
+                                        <option value="PRESTAMO">PRESTAMO</option>
+                                        <option value="ADELANTO DE NOMINA">ADELANTO DE NOMINA</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -54,12 +53,12 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group ">
-                                    <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>"
+                                    <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group ">
-                                    <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>"
+                                    <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>">
                                 </div>
                             </div>
                             <div class="card-footer">

@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Tpo de gasto</label>
+                                <label>Tipo de gasto</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-share-square"></i></span>
                                     <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>

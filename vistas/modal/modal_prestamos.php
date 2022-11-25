@@ -1,9 +1,9 @@
-<div class="modal fade" id="modal-gastos">
+<div class="modal fade" id="modal-prestamos">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form role="form" method="post" enctype="multipart/form-data" id="modal_gastos">
+            <form role="form" method="post" enctype="multipart/form-data" id="modal_prestamos" name="modal_prestamos">
                 <div class="modal-header" style="background-color: #ffc107">
-                    <h4 class="modal-title">Gastos</h4>
+                    <h4 class="modal-title">Ingresar o actualizar Préstamos</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="input-group ">
-                            <input type="hidden" class="form-control input-lg" name="idgasto" id="idgasto">
+                            <input type="hidden" class="form-control input-lg" name="idprestamo" id="idprestamo">
                         </div>
                     </div>
                     <div class="form-group">
@@ -20,25 +20,24 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div>
-                        <input type="date" class="form-control input-lg" id="fecha" name="fecha" value="<?php echo date("Y-m-d")?>">
+                        <input type="date" class="form-control input-lg" id="fecha_prestamo" name="fecha" value="<?php echo date("Y-m-d")?>">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Tipo de gasto</label>
+                        <label>Empleado</label>
                         <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                        <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>
-                            <option value="TIENDA" selected>TIENDA</option>
-                            <option value="PERSONAL">PERSONAL</option>
-                        </select>
+                            <span class="input-group-text"><i class="far fas fa-user-tag nav-icon"></i></span>
+                            <select name="idempleado" id="idempleado" class="form-control selectpicker" data-live-search="true" required>  </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="input-group">
+                        <label>Tipo</label>
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
-                        </div>
-                        <input type="text" name="concepto" id="concepto" class="form-control input-lg" onkeyup="mayus(this);" maxlendth="120" placeholder="Concepto" required>
+                            <span class="input-group-text"><i class="fas fa-share-square"></i></span>
+                            <select name="tipo" id="tipo_prestamo" class="form-control selectpicker" data-live-search="true" required>
+                                <option value="PRESTAMO">PRESTAMO</option>
+                                <option value="ADELANTO DE NOMINA">ADELANTO DE NOMINA</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -46,23 +45,23 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                         </div>
-                        <input type="number" step="any" class="form-control input-lg" name="importe" id="importe" maxlendth="120" placeholder="Importe" required>
+                        <input type="number" step="any" class="form-control input-lg" name="importe" id="importe_prestamo" maxlendth="120" placeholder="Importe" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group ">
-                        <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>">
+                        <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario_prestamo" value="<?php echo $_SESSION['idusuario']; ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group ">
-                        <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario" value="<?php echo $_SESSION['idusuario']; ?>">
+                        <input type="hidden" class="form-control input-lg" name="idusuario" id="idusuario_prestamo" value="<?php echo $_SESSION['idusuario']; ?>">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-danger pull-left btn-md" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button type="submit" class="btn btn-success btn-md" id="btnGuardarGasto"><i class="fa fa-save"></i> Guardar gasto</button>
+                    <button type="submit" class="btn btn-success btn-md" id="btnGuardarPrestamo"><i class="fa fa-save"></i> Guardar</button>
                 </div>
             </form>
         </div>

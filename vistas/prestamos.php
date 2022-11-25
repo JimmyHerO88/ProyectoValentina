@@ -8,7 +8,7 @@
   
   require 'header.php';
 
-  if ($_SESSION['corte_caja']==1){
+  if ($_SESSION['nomina']==1){
 
 ?>
 <!--Contenido-->
@@ -31,8 +31,8 @@
                           <thead>
                             <th>Opciones</th>
                             <th>Fecha</th>
-                            <th>Empleado</th>
-                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th>Concepto</th>
                             <th>Importe</th>
                           </thead>
 
@@ -43,8 +43,8 @@
                           <tfoot>
                             <th>Opciones</th>
                             <th>Fecha</th>
-                            <th>Empleado</th>
-                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th>Concepto</th>
                             <th>Importe</th>
                           </tfoot>
                         </table>
@@ -73,7 +73,7 @@
 
 ?>
 
-<script type="text/javascript" src="scripts/deposito.js"></script>
+<script type="text/javascript" src="scripts/prestamo.js"></script>
 
 <?php
 }

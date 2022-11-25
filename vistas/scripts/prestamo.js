@@ -16,7 +16,6 @@ function init(){
     //Cargamos los items de los empleados
     $.post("../ajax/prestamo.ajax.php?op=selectempleado", function(r){
         $("#idempleado").html(r);
-        $('#idempleado').selectpicker('refresh');
     });
 
     //Cargamos el folio
@@ -119,7 +118,13 @@ function guardaryeditar(e){
         processData: false,
 
         success: function(datos){
-            bootbox.alert(datos);
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             mostrarform(false);
             tabla.ajax.reload();
         }
@@ -140,9 +145,7 @@ function mostrar(idprestamo){
 
         $("#idprestamo").val(data.idprestamo);
         $("#tipo").val(data.tipo);
-        $("#tipo").selectpicker('refresh');
         $("#idempleado").val(data.idempleado);
-        $("#idempleado").selectpicker('refresh');
         $("#fecha").val(data.fecha);
         $("#importe").val(data.importe);
         $("#idusuario").val(data.idusuario);
@@ -153,20 +156,29 @@ function mostrar(idprestamo){
 //FUNCION DESACTIVAR
 function eliminar(idprestamo){
 
-    bootbox.confirm("¿Está seguro de eliminar este préstamo?",function(result){
-      
-        if(result){
-
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
             $.post("../ajax/prestamo.ajax.php?op=eliminar", {idprestamo : idprestamo}, function(e){
 
-                bootbox.alert(e);
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
                 tabla.ajax.reload();
 
             });
-
+          
         }
-
-    })
+      })
 
 }
 
