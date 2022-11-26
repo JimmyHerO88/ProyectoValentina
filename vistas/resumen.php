@@ -283,8 +283,7 @@ if(!isset($_SESSION["nombre"])){
                   <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-notas">Notas</button>
                   <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-liquidaciones">Liquidaciones</button>
                   <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-proveedores">Proveedores</button>
-                  <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#modal-prestamos">Préstamos</button>
-                  <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#">Adelantos</button>
+                  <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#modal-prestamos">Prést./Adel.</button>
                   <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#">Prenómina</button>
                   <button type="button" class="btn btn-success m-1" style="width: 130px" onclick="imprimeCuadrante()">Imprimir Cuadrante</button>
                   

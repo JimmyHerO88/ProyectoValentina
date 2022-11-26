@@ -13,7 +13,7 @@ const fechaVale = document.getElementById('fecha_vale');
 const conceptoVale = document.getElementById('concepto_vale');
 const importeVale = document.getElementById('importe_vale');
 //VARIABLES DE PRESATMOS
-const indexEmpleado = document.modal_prestamos.idempleado.selectedIndex;
+const indexEmpleado = document.getElementById('idempleado');
 const importePrestamo = document.getElementById('importe_prestamo');
 const fechaPrestamo = document.getElementById('fecha_prestamo');
 const tipoPrestamo = document.getElementById('tipo_prestamo');
@@ -363,7 +363,7 @@ function guardarPrestamo(e){
     e.preventDefault();//No se activará la acción predeterminada del evento
     $("#btnGuardarPrestamo").prop("disabled", true);
     let formData = new FormData($("#modal_prestamos")[0]);
-    let empleadoElegido = document.modal_prestamos.idempleado.options[indexEmpleado].text;
+    let empleadoElegido = indexEmpleado.options[indexEmpleado.selectedIndex].text;
 
     $.ajax({
 
@@ -390,7 +390,7 @@ function guardarPrestamo(e){
         <p style="font-size: 80px;">***********************************************************<br></p>
         <h4 class="text-center" style="font-size: 80px;"><strong>CONCEPTO</strong></h4>
         <p style="font-size: 80px;">***********************************************************</p>
-        <h2 class="text-center" style="font-size: 180px;" id="concepto_vale"><span><strong>${tipoPrestamo.value} a  ${empleadoElegido}</strong></span></h2>
+        <h2 class="text-center" style="font-size: 180px;" id="concepto_vale"><span><strong>${tipoPrestamo.value} <br>  ${empleadoElegido}</strong></span></h2>
         <p style="font-size: 80px;">***********************************************************</p>
         <h4 class="text-center" style="font-size: 80px;"><strong>FIRMA DE RECIBIDO</strong></h4><br>
         <p class="text-center" style="font-size: 80px; "><br><br><br>_________________________________________________</p>
