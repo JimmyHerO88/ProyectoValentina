@@ -65,9 +65,18 @@ Class Empleado{
 	}
 
     //Metodo para MOSTRAR LAS socialesS EN EL SELECT
-    public function selectempleado(){
+    public function select(){
 
         $sql = "SELECT * FROM empleado WHERE status = 1";
+        
+        return ejecutarConsulta($sql);
+
+    }
+
+    //Metodo para MOSTRAR LAS socialesS EN EL SELECT
+    public function sueldo($idempleado){
+
+        $sql = "SELECT sueldo_dia FROM empleado WHERE idempleado = '$idempleado'";
         
         return ejecutarConsulta($sql);
 

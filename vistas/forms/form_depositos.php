@@ -36,7 +36,7 @@
                                 <label>Tipo de depósito</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select id="tipo" name="tipo" class="form-control select2" style="width: 100%;" required>
+                                    <select id="tipo" name="tipo" class="form-control selectpicker" style="width: 100%;" data-live-search="true" required>
                                     <option value="DEPÓSITO">DEPÓSITO</option>
                                     <option value="TARJETA">TARJETA</option>
                                     <option value="TRANSFERENCIA BANCARIA">TRANSFERENCIA BANCARIA</option>

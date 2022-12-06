@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="../public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">   
-    <!-- Select2 -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Select -->
+    <link rel="stylesheet" href="../public/dist/css/bootstrap-select.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../public/dist/css/adminlte.css">
     <link rel="stylesheet" href="../public/dist/css/responsive.bootstrap.min.css">
@@ -51,8 +51,8 @@
     <script src="../public/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../public/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../public/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- Select2 -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Select -->
+    <script src="../public/dist/js/bootstrap-select.min.js"></script>
     <!-- SweetAlert2 -->
     <script src="../public/plugins/sweetalert2/sweetalert2.all.js"></script>
 
@@ -237,13 +237,7 @@
                       <li class="nav-item">
                         <a href="prestamos.php" class="nav-link">
                           <i class="fas fa-money-check-alt nav-icon"></i>
-                          <p>Préstamos</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="" class="nav-link">
-                          <i class="far fas fa-file-invoice-dollar nav-icon"></i>
-                          <p>Adelantos de nómina</p>
+                          <p>Préstamos y Adelantos</p>
                         </a>
                       </li>
                       <li class="nav-item">
@@ -253,7 +247,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="prenomina.php" class="nav-link">
                           <i class="far fas fa-envelope-open nav-icon"></i>
                           <p>Prenómina</p>
                         </a>
