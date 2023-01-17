@@ -25,6 +25,11 @@ if(!isset($_SESSION["nombre"])){
               $sentencia->execute();
               $g_nomina = $sentencia->fetchAll();
 
+    $sql200 = "SELECT nombre, t_general FROM nomina INNER JOIN empleado on nomina.idempleado = empleado.idempleado WHERE fecha = '".$filtro."' ORDER BY nombre";
+              $sentencia200 = $pdo->prepare($sql200);
+              $sentencia200->execute();
+              $prenomina = $sentencia200->fetchAll();
+
       $sql2 = "SELECT * FROM pago_proveedor WHERE fecha = '".$filtro."' ORDER BY concepto";
               $sentencia2 = $pdo->prepare($sql2);
               $sentencia2->execute();
@@ -71,7 +76,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia8 = $pdo->prepare($sql8);
               $sentencia8->execute();
               $total_gastos_T = $sentencia8->fetch(); 
-              $t_gastos_tienda = $total_gastos_T[0];
               if(empty($total_gastos_T[0])){
                 $t_gastos_tienda = 0;
               }else{
@@ -83,11 +87,10 @@ if(!isset($_SESSION["nombre"])){
               $sentencia9 = $pdo->prepare($sql9);
               $sentencia9->execute();
               $total_gastos_P = $sentencia9->fetch(); 
-              $t_gastos_personales_cuadrante = $total_gastos_P[0];
               if(empty($total_gastos_P[0])){
-                $t_gastos_personales_cuadrante = 0;
+                $t_gastos_personales = 0;
               }else{
-                $t_gastos_personales_cuadrante = $total_gastos_P[0];
+                $t_gastos_personales = $total_gastos_P[0];
               }
 
       $sql10 = "SELECT SUM(importe) FROM liquidaciones WHERE fecha = '".$filtro."'";
@@ -204,15 +207,14 @@ if(!isset($_SESSION["nombre"])){
                 $total_notas = $total_venta[0];
               }
 
-      $sql130 = "SELECT SUM(importe) FROM gasto WHERE fecha = '".$filtro."'";
+      $sql130 = "SELECT SUM(importe) FROM deposito WHERE fecha = '".$filtro."'";
                 $sentencia130 = $pdo->prepare($sql130);
                 $sentencia130->execute();
-                $total_gastos_P = $sentencia130->fetch(); 
-                $t_gastos_personales = $total_gastos_P[0];
-                if(empty($total_gastos_P[0])){
-                  $t_gastos_personales = 0;
+                $total_depos_gral = $sentencia130->fetch(); 
+                if(empty($total_depos_gral[0])){
+                  $TOTAL_DEPOSITOS = 0;
                 }else{
-                  $t_gastos_personales = $total_gastos_P[0];
+                  $TOTAL_DEPOSITOS = $total_depos_gral[0];
                 }
 
       $sql140 = "SELECT SUM(importe) FROM deposito WHERE tipo = 'DEPÓSITO' and fecha = '".$filtro."'";
@@ -264,8 +266,22 @@ if(!isset($_SESSION["nombre"])){
                 $sentencia180->execute();
                 $listado_depos = $sentencia180->fetchAll();
 
+      $sql190 = "SELECT SUM(t_general) FROM nomina WHERE fecha = '".$filtro."'";
+                $sentencia190 = $pdo->prepare($sql190);
+                $sentencia190->execute();
+                $total_nomina = $sentencia190->fetch(); 
+                if(empty($total_nomina[0])){
+                  $t_nomina = 0;
+                }else{
+                  $t_nomina = $total_nomina[0];
+                }
+
+
+    $TotalGastosNomina = $t_nomina + $t_prestamos;
+    $TotalGastos = $t_gastos_tienda + $t_gastos_personales;
+    $TotalGastosGeneral = $t_gastos_tienda + $t_gastos_personales + $TotalGastosNomina;
     $Total_VENTA = $total_notas + $t_liquidaciones;
-    $Diferencia = $t_gastos_personales + $t_tarjeta + $t_depositos + $t_facturas + $t_transferencias - $Total_VENTA;
+    $Diferencia = $TotalGastosGeneral + $TOTAL_DEPOSITOS - $Total_VENTA;
 
 ?>
 <!--Contenido-->
@@ -284,10 +300,12 @@ if(!isset($_SESSION["nombre"])){
                   <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-liquidaciones">Liquidaciones</button>
                   <button type="button" class="btn btn-warning m-1" style="width: 130px"data-toggle="modal" data-target="#modal-proveedores">Proveedores</button>
                   <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#modal-prestamos">Prést./Adel.</button>
+                  <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#modal-abonos">Abonos</button>
                   <button type="button" class="btn btn-info m-1" style="width: 130px"data-toggle="modal" data-target="#modal-prenomina">Prenómina</button>
-                  <button type="button" class="btn btn-success m-1" style="width: 130px" onclick="imprimeCuadrante()">Imprimir Cuadrante</button>
-                  
-                  <button type="button" class="btn btn-success m-1" style="width: 130px" onclick="imprimeResumen()">Imprimir Resumen</button>
+                  <div>
+                    <button type="button" class="btn btn-success m-1" style="width: 130px" onclick="imprimeCuadrante()">Imprimir Cuadrante</button>                    
+                    <button type="button" class="btn btn-success m-1" style="width: 130px" onclick="imprimeResumen()">Imprimir Resumen</button>
+                  </div>
                 </div>
               </div><!-- /.box -->
               <div class="col-12 text-center pb-3" id="search">
@@ -307,21 +325,27 @@ if(!isset($_SESSION["nombre"])){
                   <div class="row">
                     <div class="col-6" style="border-right: 5px solid;">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>NÓMINA</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center" >
+                      <table class="justify-content-center table table-striped table-sm" >
                         <tbody>
-                        <?php foreach($g_nomina as $nomina): ?>
+                        <?php foreach($prenomina as $nomina_personal): ?>
                             <tr>
-                              <td style="font-size: 20px;"><?php echo substr(ucfirst(strtolower($nomina['tipo'])),0,8);?> <?php echo substr($nomina['nombre'],0,10);?>...</td>
-                              <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($nomina['importe'],2);?></td>
+                              <td style="font-size: 20px;">Nómina de <?php echo $nomina_personal['nombre'];?></td>
+                              <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($nomina_personal['t_general'],2);?></td>
+                            </tr>
+                        <?php endforeach?>  
+                        <?php foreach($g_nomina as $prestamos): ?>
+                            <tr>
+                              <td style="font-size: 20px;"><?php echo ucfirst(strtolower($prestamos['tipo']));?> <?php echo $prestamos['nombre'];?></td>
+                              <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($prestamos['importe'],2);?></td>
                             </tr>
                         <?php endforeach?>     
                         </tbody>
                       </table>
-                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_prestamos,2);?></strong></p>
+                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($TotalGastosNomina,2);?></strong></p>
                     </div>
                     <div class="col-6">
                       <h5 style="border-style: solid; border-width: 3px;" class="text-center"><strong>PROVEEDORES</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center" >
+                      <table class="justify-content-center table table-striped table-sm" >
                         <tbody>
                         <?php foreach($g_prov as $prov): ?>
                             <tr>
@@ -337,7 +361,7 @@ if(!isset($_SESSION["nombre"])){
                   <div class="row">
                     <div class="col-6" style="border-right: 5px solid; border-top: 5px solid; padding-top: 15px;">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>GASTOS TIENDA</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  >
+                      <table class="justify-content-center table table-striped table-sm"  >
                         <tbody>
                         <?php foreach($g_tienda as $tienda): ?>
                             <tr>
@@ -349,7 +373,7 @@ if(!isset($_SESSION["nombre"])){
                       </table>
                       <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_gastos_tienda,2);?></strong></p>
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>GASTOS PERSONALES</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  >
+                      <table class="justify-content-center table table-striped table-sm"  >
                         <tbody>
                         <?php foreach($g_personal as $personal): ?>
                             <tr>
@@ -359,11 +383,11 @@ if(!isset($_SESSION["nombre"])){
                         <?php endforeach?>
                         </tbody>
                       </table>
-                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_gastos_personales_cuadrante,2);?></strong></p>
+                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($TotalGastos,2);?></strong></p>
                     </div>
                     <div class="col-6" style="border-top: 5px solid; padding-top: 15px;">
                       <h5 style="border-style: solid; border-width: 3px;" class="text-center"><strong>DEPÓSITOS</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  >
+                      <table class="justify-content-center table table-striped table-sm"  >
                         <tbody>
                         <?php foreach($listado_depos as $depos): ?>
                             <tr>
@@ -373,9 +397,9 @@ if(!isset($_SESSION["nombre"])){
                         <?php endforeach?>
                         </tbody>
                       </table>
-                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_depositos,2);?></strong></p>
+                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($TOTAL_DEPOSITOS,2);?></strong></p>
                       <h5 style="border-style: solid; border-width: 3px;" class="text-center"><strong>LIQUIDACIONES</strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center"  >
+                      <table class="justify-content-center table table-striped table-sm"  >
                         <tbody>
                         <?php foreach($liquidaciones as $liq): ?>
                             <tr>
@@ -389,11 +413,11 @@ if(!isset($_SESSION["nombre"])){
                     </div>
                   </div>     
                 </div>
-                <div class="col-12 pt-5 pb-1 text-center" id="resumen">
+                <div class="col-12 pt-5 pb-1" id="resumen">
                   <div>
-                    <h3 class=""><strong>Resumen de Corte del día <?php echo $filtro;?></strong></h3>
+                    <h3 class="text-center"><strong>Resumen de Corte del día <?php echo $filtro;?></strong></h3>
                     <h5  style="border-style: solid; border-width: 3px;"  class="text-center" style="font-size: 25px;"><strong>TOTAL NOTAS FORÁNEAS $ <?php echo number_format($t_foraneas,2);?></strong></h5>
-                    <table class="justify-content-center table table-striped table-sm text-center" >
+                    <table class="justify-content-center table table-striped table-sm" >
                       <thead>
                         <th style="font-size: 20px;">Folios</th>
                         <th style="font-size: 20px;">Importe</th>
@@ -417,7 +441,7 @@ if(!isset($_SESSION["nombre"])){
                   <div class="row">
                     <div class="col-6">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>REMISIONES $ <?php echo number_format($t_remisiones,2);?></strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center">
+                      <table class="justify-content-center table table-striped table-sm">
                         <thead>
                           <th style="font-size: 20px;">Folios</th>
                           <th style="font-size: 20px;">Importe</th>   
@@ -434,7 +458,7 @@ if(!isset($_SESSION["nombre"])){
                     </div>
                     <div class="col-6">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>PEDIDOS $ <?php echo number_format($t_pedidos,2);?></strong></h5>
-                      <table class="justify-content-center table table-striped table-sm text-center">
+                      <table class="justify-content-center table table-striped table-sm">
                         <thead>
                           <th style="font-size: 20px;">Folios</th>
                           <th style="font-size: 20px;">Importe</th>      
@@ -453,7 +477,7 @@ if(!isset($_SESSION["nombre"])){
                   <div class="row">
                     <div class="col-6">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>TICKETS REMISIONES $ <?php echo number_format($tickets_r,2);?></strong></h4>
-                      <table class="justify-content-center table table-striped table-sm text-center">
+                      <table class="justify-content-center table table-striped table-sm">
                         <thead>
                           <th style="font-size: 20px;">Folios</th>
                           <th style="font-size: 20px;">Importe</th> 
@@ -470,7 +494,7 @@ if(!isset($_SESSION["nombre"])){
                     </div>
                     <div class="col-6">
                       <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>TICKETS FISCALES $ <?php echo number_format($tickets_f,2);?></strong></h4>
-                      <table class="justify-content-center table table-striped table-sm text-center">
+                      <table class="justify-content-center table table-striped table-sm">
                         <thead>
                           <th style="font-size: 20px;">Folios</th>
                           <th style="font-size: 20px;">Importe</th> 
@@ -486,8 +510,8 @@ if(!isset($_SESSION["nombre"])){
                       </table>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <h5  style="border-style: solid; border-width: 3px;"  class="text-center"><strong>LIQUIDACIONES $ <?php echo number_format($t_liquidaciones,2);?></strong></h5>
+                  <div class="col-12 text-center">
+                    <h5  style="border-style: solid; border-width: 3px;"><strong>LIQUIDACIONES $ <?php echo number_format($t_liquidaciones,2);?></strong></h5>
                     <p style="font-size: 40px"><strong>
                       ****************************************************************<br>
                     Venta Real: $ <?php echo number_format($Total_VENTA,2);?><br>
@@ -499,14 +523,14 @@ if(!isset($_SESSION["nombre"])){
                     Transferencias: $ <?php echo number_format($t_transferencias,2);?>
                     
                     </p>
-                    <p class="text-danger" style="font-size: 30px">Gastos: $ <?php echo number_format($t_gastos_personales,2);?></p>
+                    <p class="text-danger" style="font-size: 30px">Gastos: $ <?php echo number_format($TotalGastosGeneral,2);?></p>
                     <p style="font-size: 40px">****************************************************************</p>
                     <?php if($Diferencia > 0){ ?>
-                        <p class="text-success" style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>;
+                        <p class="text-success" style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>
                     <?php }else if($Diferencia < 0){ ?>
-                        <p class="text-danger" style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>;
+                        <p class="text-danger" style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>
                     <?php }else{ ?>
-                        <p style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>;
+                        <p style="font-size: 30px">Diferencia: $ <?php echo number_format($Diferencia,2);?><br></p></strong></p>
                     <?php } ?>
                   </div>
                 </div> 
@@ -515,12 +539,10 @@ if(!isset($_SESSION["nombre"])){
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div>
-
       <!-- vale de caja -->
       <div id="vale_caja"></div>
 
-      <!-- vale de caja -->
-      <div id="vale_deposito"></div>
+
 
       <!-- MODAL -->
       <?php
@@ -530,6 +552,7 @@ if(!isset($_SESSION["nombre"])){
         require 'modal/modal_registro_notas.php';
         require 'modal/modal_liquidaciones.php';
         require 'modal/modal_prestamos.php';
+        require 'modal/modal_prenomina.php';
       ?>
 
 <?php

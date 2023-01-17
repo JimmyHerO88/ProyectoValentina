@@ -65,7 +65,7 @@ Class Empleado{
 	}
 
     //Metodo para MOSTRAR LAS socialesS EN EL SELECT
-    public function select(){
+    public function selectempleado(){
 
         $sql = "SELECT * FROM empleado WHERE status = 1";
         

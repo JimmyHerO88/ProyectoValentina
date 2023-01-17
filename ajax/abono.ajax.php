@@ -12,7 +12,7 @@ $observacion = isset($_POST["observacion"])? limpiarCadena($_POST["observacion"]
 $tipo = isset($_POST["tipo"])? limpiarCadena($_POST["tipo"]) : "";
 $importe = isset($_POST["importe"])? limpiarCadena($_POST["importe"]) : "";
 
-
+$idabononomina = $idempleado."-".substr(md5(time()), 0, 16);;
 
 switch ($_GET["op"]){
 
@@ -20,7 +20,7 @@ switch ($_GET["op"]){
 
         if(empty($idabono)){
 
-            $rspta = $abono->insertar($fecha, $idempleado, $tipo, $importe, $idusuario);
+            $rspta = $abono->insertar($fecha, $idempleado, $tipo, $importe, $idusuario, $idabononomina);
             echo $rspta ? "El abono se ha guardado correctamente" : "El abono no se pudo guardar";
 
         }else{

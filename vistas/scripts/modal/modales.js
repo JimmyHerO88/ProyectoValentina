@@ -4,8 +4,8 @@ const botones = document.getElementById('botones');
 const cuadrante = document.getElementById('cuadrante');
 const resumen = document.getElementById('resumen');
 const search = document.getElementById('search');
-//VARIABLES DE GASTOS
 const valeCaja = document.getElementById('vale_caja');
+//VARIABLES DE GASTOS
 const fecha = document.getElementById('fecha');
 const concepto = document.getElementById('concepto');
 const importe = document.getElementById('importe');
@@ -18,7 +18,6 @@ const importePrestamo = document.getElementById('importe_prestamo');
 const fechaPrestamo = document.getElementById('fecha_prestamo');
 const tipoPrestamo = document.getElementById('tipo_prestamo');
 //VARIABLES DE DEPOSITOS
-const valeDepo = document.getElementById('vale_deposito');
 const fechaDepo = document.getElementById('fecha_depo');
 const tipoDepo = document.getElementById('tipo_depo');
 const cant1 = document.getElementById('cant1');
@@ -37,6 +36,16 @@ const resultado6 = document.getElementById('resultado6');
 const resultado7 = document.getElementById('resultado7');
 const observacion = document.getElementById('observacion');
 const importeDepo = document.getElementById('importe_depo');
+//VARIABLES PRENOMINA
+const indexEmpleadoNomina = document.getElementById('idempleadoNomina');
+const fechaNomina = document.getElementById('fecha_nomina');
+const dias = document.getElementById('dias');
+const tiempoExtra = document.getElementById('t_extra');
+const ventas = document.getElementById('ventas');
+const deuda = document.getElementById('deudaNomina');
+const abono = document.getElementById('abono');
+const tiempoPerdido = document.getElementById('t_perdido');
+const total = document.getElementById('t_general');
 
 
 //FUNCION SEPARADOR DE MILES
@@ -85,12 +94,32 @@ function init(){
         
     });
 
+    $("#modal_prenomina").on("submit", function(e){
+
+        guardarPrenomina(e);
+        
+    });
+
     //Cargamos los items de los empleados
     $.post("../ajax/prestamo.ajax.php?op=selectempleado", function(r){
         $("#idempleado").html(r);
+        $('#idempleado').selectpicker('refresh');
+    });
+
+    $.post("../ajax/prestamo.ajax.php?op=selectempleado", function(r){
+        $("#idempleadoNomina").html(r);
+        $('#idempleadoNomina').selectpicker('refresh');
     });
 
 }
+
+//Funcion prenomina
+/* function pronomina() {
+    $.post("../ajax/nomina.ajax.php?op=mostrar", function(r){
+        $("#idempleado").html(r.);
+        $('#idempleado').selectpicker('refresh');
+    });
+} */
 
 //Funcion mayusculas
 function mayus(e) {
@@ -116,7 +145,7 @@ function guardarGasto(e){
     });   
 
     $("#modal-gastos").modal("hide");
-    $("#modal-depositos").modal("hide");
+    //$("#modal-depositos").modal("hide");
 
    
       contentWrapper.style.display = "none";
@@ -164,13 +193,13 @@ function guardarDeposito(e){
 
     });   
 
-    $("#modal-gastos").modal("hide");
+    //$("#modal-gastos").modal("hide");
     $("#modal-depositos").modal("hide");
 
    
         contentWrapper.style.display = "none";
 
-        valeDepo.innerHTML = `  <div class="col-12 text-center">
+        valeCaja.innerHTML = `  <div class="col-12 text-center">
                                     <h1 class="text-center" style="font-size: 200px;"><strong>Creaciones Valentina</strong></h1>
                                     <h3 class="text-center" style="font-size: 150px;">Fecha: <strong>${fechaDepo.value}</strong></h3>
                                     <p style="font-size: 80px;">***********************************************************</p>
@@ -400,6 +429,107 @@ function guardarPrestamo(e){
             window.print();
             setTimeout(() => {
                     window.location.reload();
+            }, "800");
+        }, "1500");
+
+    }
+    
+//FUNCION PARA MOSTRAR LA DEDUA ACTUAL DEL EMPLEADO SEGUN EL EMPLEADO QUE SE ELIJA
+function mostrar(idempleado){
+
+    $.post("../ajax/nomina.ajax.php?op=mostrar",{idempleado:idempleado}, function(data, status){
+
+		data = JSON.parse(data);	
+		$("#idempleado").val(data.idempleado);
+        $("#deuda").val(data.debe);
+
+ 	})
+}
+
+function mostrarDeuda(idempleadoNomina){
+    
+    dias.value = "";
+    tiempoExtra.value = "";
+    tiempoPerdido.value = "";
+    ventas.value = "";
+    sueldo_dia.value = "";
+    abono.value = "";
+    total.value = "";
+
+    $.post("../ajax/nomina.ajax.php?op=mostrar",{idempleado:idempleadoNomina}, function(data, status){
+
+		data = JSON.parse(data);	
+		$("#idempleadoNomina").val(data.idempleado);
+		$("#sueldo_dia").val(data.sueldo_dia);
+        $("#deudaNomina").val(data.debe);
+
+ 	})
+}
+
+//FUNCION PARA GUARDAR Y EDITAR GASTOS
+function guardarPrenomina(e){
+    
+
+    e.preventDefault();//No se activará la acción predeterminada del evento
+    $("#btnGuardarNomina").prop("disabled", true);
+    let formData = new FormData($("#modal_prenomina")[0]);
+    let empleadoElegido = indexEmpleadoNomina.options[indexEmpleadoNomina.selectedIndex].text;
+    let deudaAcutal = parseFloat(deuda.value) - parseFloat(abono.value);
+
+    $.ajax({
+
+        url: "../ajax/nomina.ajax.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+
+    });   
+
+    $("#modal-prenomina").modal("hide");
+   
+      contentWrapper.style.display = "none";
+
+        valeCaja.innerHTML = `<div class="col-12">
+        <h1 class="text-center" style="font-size: 200px;"><strong>Creaciones Valentina</strong></h1>
+        <h2 class="text-center" style="font-size: 150px;"><u>Vale de Nómina</u></h2>
+        <h3 class="text-center" style="font-size: 150px;">Fecha: <strong>${fechaPrestamo.value}</strong></h3>
+        <p class="text-center" style="font-size: 80px;">***********************************************************</p>
+        <h4 class="text-center" style="font-size: 150px;"><strong>Deuda acumulada: $ ${deudaAcutal} </strong></h4>
+        <p class="text-center" style="font-size: 80px;">***********************************************************</p>
+        <h4 class="text-center" style="font-size: 80px;"><strong>Nómina a nombre de:</strong></h4>
+        <h2 class="text-center" style="font-size: 180px;"><span><strong>${empleadoElegido}</strong></span></h2>
+        <p class="text-center" style="font-size: 80px;">***********************************************************</p>
+        <div class="row">
+            <div class="col-6">
+              <p class="text-right" style="font-size: 120px;">Días Laborados</p>
+              <p class="text-right" style="font-size: 120px;">Tiempo Extra</p>
+              <p class="text-right" style="font-size: 120px;">Ventas</p>
+              <p class="text-right" style="font-size: 120px;">Abono a Deuda</p>
+              <p class="text-right" style="font-size: 120px;">Tiempo Perdido</p>
+            </div>
+            <div class="col-6">
+              <p class="text-left" style="font-size: 120px; padding-left: 100px;">${dias.value}</p>
+              <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(tiempoExtra.value)}</p>
+              <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(ventas.value)}</p>
+              <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(abono.value)}</p>
+              <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(tiempoPerdido.value)}</p>
+            </div>
+            <div class="col-12">
+              <p class="text-center" style="font-size: 80px;">***********************************************************<br></p>
+              <p class="text-center" style="font-size: 120px;"><strong>Total a Pagar</strong></p>
+              <h4 class="text-center" style="font-size: 250px;"><strong>$ ${formatoMexico(total.value)}</strong></h4><br>
+              <p class="text-center" style="font-size: 80px;">***********************************************************</p><br><br>
+            </div>
+        </div>
+        <h4 class="text-center" style="font-size: 80px; padding-top: 20px;"><strong>FIRMA DE RECIBIDO</strong></h4><br>
+        <p class="text-center" style="font-size: 80px; "><br><br><br>_________________________________________________</p>
+      </div>`;
+
+        setTimeout(() => {
+            window.print();
+            setTimeout(() => {
+                window.location.reload();
             }, "800");
         }, "1500");
 

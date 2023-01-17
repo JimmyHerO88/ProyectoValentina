@@ -9,14 +9,15 @@ function init(){
     $("#formulario").on("submit", function(e){
         guardaryeditar(e);
     })
+    //Cargamos los items de los empleados
+    $.post("../ajax/prestamo.ajax.php?op=selectempleado", function(r){
+        $("#idempleado").html(r);
+        $('#idempleado').selectpicker('refresh');
+    });
 
 }
 
-//Cargamos los items de empleados
-$.post("../ajax/nomina.ajax.php?op=selectEmpleado", function(r){
-    $("#idempleado").html(r);
-    $('#idempleado').selectpicker('refresh');
-});
+
 
 
 
@@ -28,10 +29,8 @@ function limpiar(){
 	$("#t_extra").val("");
 	$("#ventas").val("");
 	$("#t_perdido").val("");
-	$("#a_cuenta").val("");
+	$("#deuda").val("");
 	$("#abono").val("");
-	$("#mercancia").val("");
-	$("#caja_ahorro").val("");
 	$("#idsucursal").val("");
 	$("#idusuario").val("");
 	$("#t_general").val("");
@@ -131,8 +130,26 @@ function guardaryeditar(e){
 
 }
 
+
+//FUNCION MOSTRAR
+function mostrar(idempleado){
+
+    $.post("../ajax/nomina.ajax.php?op=mostrar",{idempleado:idempleado}, function(data, status){
+
+		data = JSON.parse(data);		
+		mostrarform(true);
+
+		$("#idempleado").val(data.idempleado);
+		/* $("#num_empleado").val(data.num_empleado);
+		$("#nombre").val(data.nombre); */
+		$("#sueldo_dia").val(data.sueldo_dia);
+        $("#deuda").val(data.debe);
+
+ 	})
+}
+
 //FUNCION eliminar
-function eliminar(idnomina){
+function eliminar(idabononomina){
 
     Swal.fire({
         title: '¿Está seguro de eliminar este registro?',
@@ -144,7 +161,7 @@ function eliminar(idnomina){
         confirmButtonText: 'Si, eliminar registro'
       }).then((result) => {
         if (result.isConfirmed) {
-            $.post("../ajax/nomina.ajax.php?op=eliminar", {idnomina : idnomina}, function(e){
+            $.post("../ajax/nomina.ajax.php?op=eliminar", {idabononomina : idabononomina}, function(e){
 
                 Swal.fire(
                     '¡Registro Eliminado!',

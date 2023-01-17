@@ -45,7 +45,9 @@ switch ($_GET["op"]){
 
         while ($reg=$rspta->fetch_object()){
             $data[] = array(
-                            "0" =>'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idliquidacion.')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idliquidacion.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
+                            "0" =>'
+                            <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idliquidacion.')"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            <button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idliquidacion.')"><i class="fas fa-edit"></i></button>',
                             "1" => $reg->fecha,
                             "2" => $reg->concepto,
                             "3" => '$ '.number_format($reg->importe,2)

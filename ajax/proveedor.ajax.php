@@ -56,8 +56,9 @@ switch ($_GET["op"]){
 
         while ($reg=$rspta->fetch_object()){
             $data[] = array(
-                            "0" =>'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idproveedor.')"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idproveedor.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
+                            "0" =>'
+                            <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idproveedor.')"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            <button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idproveedor.')"><i class="fas fa-edit"></i></button>',
                             "1" => $reg->nombre,
                             "2"=>($reg->status)?'<button class="btn btn-success btn-xs" onclick="desactivar('.$reg->idproveedor.')">Activado</button>':
                             '<button class="btn btn-danger btn-xs" onclick="activar('.$reg->idproveedor.')">Desactivado</button>'

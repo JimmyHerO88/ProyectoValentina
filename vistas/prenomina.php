@@ -36,9 +36,7 @@
                             <th>T_Extra</th>
                             <th>Ventas</th>
                             <th>T_Perdido</th>
-                            <th>Adelanto</th>
                             <th>Abono</th>
-                            <th>Mercancía</th>
                             <th>T_General</th>
                           </thead>
 
@@ -54,9 +52,7 @@
                             <th>T_Extra</th>
                             <th>Ventas</th>
                             <th>T_Perdido</th>
-                            <th>Adelanto</th>
                             <th>Abono</th>
-                            <th>Mercancía</th>
                             <th>T_General</th>
                           </tfoot>
                         </table>

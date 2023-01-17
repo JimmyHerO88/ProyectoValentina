@@ -16,12 +16,7 @@ function init(){
     //Cargamos los items de los empleados
     $.post("../ajax/prestamo.ajax.php?op=selectempleado", function(r){
         $("#idempleado").html(r);
-    });
-
-    //Cargamos el folio
-    $.post("../ajax/prestamo.ajax.php?op=contar", function(r){
-        $("#folio").html(r);
-        $('#folio').value(data.folio);
+        $('#idempleado').selectpicker('refresh');
     });
 
 }
@@ -151,6 +146,20 @@ function mostrar(idprestamo){
         $("#idusuario").val(data.idusuario);
 
     })
+}
+
+//FUNCION MOSTRAR
+function mostrardeuda(idempleado){
+
+    $.post("../ajax/nomina.ajax.php?op=mostrar",{idempleado:idempleado}, function(data, status){
+
+		data = JSON.parse(data);		
+		mostrarform(true);
+
+		$("#idempleado").val(data.idempleado);
+        $("#deuda").val(data.debe);
+
+ 	})
 }
 
 //FUNCION DESACTIVAR

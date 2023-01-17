@@ -167,6 +167,7 @@ switch ($_GET["op"]){
 			in_array(7,$valores)?$_SESSION['productos']=1:$_SESSION['productos']=0;
 
 		}
+	
 
 		echo json_encode($fetch);
 

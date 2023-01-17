@@ -20,24 +20,33 @@
                             <div class="form-group">
                                 <label for="fecha">Fecha:</label>
                                 <div class="input-group ">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                    <input type="date" class="form-control input-lg"  name="fecha" id="fecha" value="<?php echo date("Y-m-d")?>">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="date" class="form-control input-lg" id="fecha_prestamo" name="fecha" value="<?php echo date("Y-m-d")?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Empleado</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fas fa-user-tag nav-icon"></i></span>
-                                    <select name="idempleado" id="idempleado" class="form-control selectpicker" data-live-search="true" required>  </select>
+                                    <select name="idempleado" id="idempleado" class="form-control selectpicker" data-live-search="true" onchange="mostrardeuda(this.value)" required>  </select>
                                 </div>
-                            </div>
+                            </div>     
+                            <div class="form-group col-12">
+                                <label>Total Deuda</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-credit-card"></i></span>
+                                    </div>
+                                    <input type="number" step="0.01" class="form-control input-md text-danger " name="deuda" id="deuda" placeholder="Total deuda" disabled>
+                                </div>
+                            </div>  
                             <div class="form-group">
                                 <label>Tipo</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-share-square"></i></span>
-                                    <select name="tipo" id="tipo" class="form-control selectpicker" data-live-search="true" required>
+                                    <select name="tipo" id="tipo_prestamo" class="form-control selectpicker" data-live-search="true" required>
                                         <option value="PRESTAMO">PRESTAMO</option>
                                         <option value="ADELANTO DE NOMINA">ADELANTO DE NOMINA</option>
                                     </select>

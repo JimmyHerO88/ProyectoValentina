@@ -5,6 +5,7 @@ require_once "../modelos/Nomina.php";
 $nomina = new Nomina();
 
 $idempleado = isset($_POST["idempleado"])? limpiarCadena($_POST["idempleado"]) : "";
+$idnomina = isset($_POST["idnomina"])? limpiarCadena($_POST["idnomina"]) : "";
 $fecha = isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]) : "";
 $dias = isset($_POST["dias"])? limpiarCadena($_POST["dias"]) : "";
 $sueldo_dia = isset($_POST["sueldo_dia"])? limpiarCadena($_POST["sueldo_dia"]) : "";
@@ -20,25 +21,23 @@ $idsucursal = isset($_POST["idsucursal"])? limpiarCadena($_POST["idsucursal"]) :
 $t_general = isset($_POST["t_general"])? limpiarCadena($_POST["t_general"]) : "";
 $tipo_abono = "ABONO A PRESTAMO";
 $tipo_ac = "LIQ. ADELANTO DE NOMINA";
+$idabononomina = isset($_POST["idabononomina"])? limpiarCadena($_POST["idabononomina"]) : "";
 
 switch ($_GET["op"]){
-
+    
     case 'guardaryeditar':
-
-        /* if(!empty($a_cuenta)){
-        require_once "../modelos/Abono.php";
-        $abonos = new Abono();
-        $rspta= $abonos->insertar($fecha, $idempleado, $tipo_ac, $a_cuenta, $idusuario);
-        }
+        
+        $idabononomina_1 = time();
 
         if(!empty($abono)){
             require_once "../modelos/Abono.php";
             $abonos = new Abono();
-            $rspta= $abonos->insertar($fecha, $idempleado, $tipo_abono, $abono, $idusuario);
-        } */
-
-        $rspta=$nomina->insertar($fecha, $idempleado, $dias, $t_extra, $ventas, $t_perdido, $a_cuenta, $abono, $mercancia, $caja_ahorro, $t_general, $idusuario, $idsucursal);
+            $rspta= $abonos->insertar($fecha, $idempleado, $tipo_abono, $abono, $idusuario, $idabononomina_1);
+        } 
+        
+        $rspta=$nomina->insertar($fecha, $idempleado, $dias, $t_extra, $ventas, $t_perdido, $a_cuenta, $abono, $mercancia, $caja_ahorro, $t_general, $idusuario, $idsucursal, $idabononomina_1);
         echo $rspta ? "Nómina registrada" : "No se pudieron registrar todos los datos de la nómina";
+        
 
     break;
 
@@ -50,18 +49,17 @@ switch ($_GET["op"]){
 
         while ($reg=$rspta->fetch_object()){
             $data[] = array(
-                            "0" =>'<a href="vale.php?idnomina='.$reg->idnomina.'"><button class="btn btn-primary btn-sm"><i class="fa fa-print" aria-hidden="true"></i></button></a>
-                            <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idnomina.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
+                            "0" =>'
+                            <a href="vale.php?idnomina='.$reg->idnomina.'"><button class="btn btn-primary btn-sm"><i class="fa fa-print" aria-hidden="true"></i></button></a>
+                            <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idabononomina.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
                             "1" => $reg->fecha,
                             "2" => $reg->nombre,
                             "3" => $reg->dias,
-                            "4" => $reg->t_extra,
-							"5" => $reg->ventas,
+							"4" => $reg->t_extra,
+                            "5" => $reg->ventas,
 							"6" => $reg->t_perdido,
-							"7" => $reg->a_cuenta,
-							"8" => $reg->abono,
-							"9" => $reg->mercancia,
-                            "10" => $reg->t_general
+                            "7" => $reg->abono,
+							"8" => $reg->t_general
                             );
         }
         $results = array(
@@ -75,14 +73,28 @@ switch ($_GET["op"]){
 
     break;
 
+    case 'mostrar':
+
+        $rspta = $nomina->mostrar($idempleado);
+        //Codificar el resultado utilizando Json
+        echo json_encode($rspta);
+
+    break;
+
     case 'eliminar':
 
-        $rspta = $nomina->eliminar($idnomina);
+        if(($idabononomina)){
+            require_once "../modelos/Abono.php";
+            $abonos = new Abono();
+            $rspta = $abonos->eliminarAbonoNonima($idabononomina);
+        }
+
+        $rspta = $nomina->eliminar($idabononomina);
         echo $rspta ? "Registro eliminado" : "El registro no se puede eliminar";
 
     break;
 
-    case 'selectEmpleado':
+    /* case 'selectEmpleado':
 
         require_once "../modelos/Empleado.php";
         $empleado = new Empleado();
@@ -93,13 +105,6 @@ switch ($_GET["op"]){
             echo '<option value='.$reg->idempleado.'>'.$reg->nombre.'</option>';
         }
 
-    break;
-
-    case 'sueldoEmpleado':
-        require_once "../modelos/Empledao.php";
-        $empleado = new Empledao();
-        $rspta = $empleado->sueldo();
-
-        echo $rspta->sueldo_dia;    
+    break; */   
         
 }

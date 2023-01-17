@@ -7,18 +7,18 @@ $("#frmAcceso").on('submit',function(e)
     $.post("../ajax/usuario.ajax.php?op=verificar",
         {"logina":logina,"clavea":clavea},
         function(data)
-    {
-        if (data!="null")
         {
-            $(location).attr("href","resumen.php");            
-        }
-        else
-        {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'El usuario y/o Password incorrecto!',
-            })
-        }
-    });
+            if (data!="null")
+            {
+                $(location).attr("href","resumen.php");            
+            }
+            else
+            {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El usuario y/o Password incorrecto!',
+                })
+            }
+        });
 })

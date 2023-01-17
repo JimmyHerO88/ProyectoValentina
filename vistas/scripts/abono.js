@@ -19,11 +19,6 @@ function init(){
         $('#idempleado').selectpicker('refresh');
     });
 
-    //Cargamos el folio
-    $.post("../ajax/abono.ajax.php?op=contar", function(r){
-        $("#folio").html(r);
-        $('#folio').value(data.folio);
-    });
 
 }
 

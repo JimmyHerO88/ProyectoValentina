@@ -27,7 +27,16 @@
                         <label>Empleado</label>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fas fa-user-tag nav-icon"></i></span>
-                            <select name="idempleado" id="idempleado" class="form-control selectpicker" data-live-search="true" required>  </select>
+                            <select name="idempleado" id="idempleado" class="form-control selectpicker" data-live-search="true" onchange="mostrar(this.value)" required>  </select>
+                        </div>
+                    </div>     
+                    <div class="form-group col-12">
+                        <label>Total Deuda</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-credit-card"></i></span>
+                            </div>
+                            <input type="number" step="0.01" class="form-control input-md text-danger " name="deuda" id="deuda" placeholder="Total deuda" disabled>
                         </div>
                     </div>
                     <div class="form-group">

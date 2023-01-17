@@ -1,0 +1,4 @@
+base de datos de pruebas en cristaleria maria elena
+DB_NAME: pruebas_corte
+USER_NAME: user_valentina
+PASSWORD: n4Br6C8PWZ2p7be
