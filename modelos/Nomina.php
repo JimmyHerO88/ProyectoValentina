@@ -25,10 +25,6 @@ Class Nomina{
 		$sql = "SELECT `idnomina`,`fecha`,`nombre`,`dias`,`t_extra`,`ventas`,`t_perdido`,`abono`,`t_general`, `idabononomina`
         FROM nomina INNER JOIN empleado ON nomina.idempleado = empleado.idempleado
         ORDER BY nombre";
-/* 
-SELECT `idnomina`,`fecha`,`nombre`,`dias`,`t_extra`,`ventas`,`t_perdido`,`abono`,`t_general`, `idabononomina`
-FROM nomina INNER JOIN empleado ON nomina.idempleado = empleado.idempleado
-ORDER BY nombre */
         
 		return ejecutarConsulta($sql);	
 	}

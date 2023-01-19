@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="../public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../public/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="../public/dist/css/styles.css">
 
     <!-- ===========================
     PLUGINS DE JAVASCRIPT
@@ -241,7 +242,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="abonos.php" class="nav-link">
                           <i class="fas fa-money-check nav-icon"></i>
                           <p>Abonos</p>
                         </a>
@@ -253,9 +254,15 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="nomina_general.php" class="nav-link">
                           <i class="far fas fa-archive nav-icon"></i>
                           <p>Nómina General</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="reporte_deudas.php" class="nav-link">
+                          <i class="far fas fa-archive nav-icon"></i>
+                          <p>Reporte de Adeudos</p>
                         </a>
                       </li>
                     </ul>

@@ -94,6 +94,12 @@ function init(){
         
     });
 
+    $("#modal_abonos").on("submit", function(e){
+
+        guardarAbono(e);
+        
+    });
+
     $("#modal_prenomina").on("submit", function(e){
 
         guardarPrenomina(e);
@@ -111,15 +117,12 @@ function init(){
         $('#idempleadoNomina').selectpicker('refresh');
     });
 
-}
-
-//Funcion prenomina
-/* function pronomina() {
-    $.post("../ajax/nomina.ajax.php?op=mostrar", function(r){
-        $("#idempleado").html(r.);
-        $('#idempleado').selectpicker('refresh');
+    $.post("../ajax/prestamo.ajax.php?op=selectempleado", function(r){
+        $("#idempleadoAbono").html(r);
+        $('#idempleadoAbono').selectpicker('refresh');
     });
-} */
+
+}
 
 //Funcion mayusculas
 function mayus(e) {
@@ -432,7 +435,39 @@ function guardarPrestamo(e){
             }, "800");
         }, "1500");
 
-    }
+}
+
+//FUNCION PARA GUARDAR Y EDITAR PRESTAMOS
+function guardarAbono(e){    
+
+    e.preventDefault();//No se activará la acción predeterminada del evento
+    $("#btnGuardarAbono").prop("disabled", true);
+    let formData = new FormData($("#modal_abonos")[0]);
+
+    $.ajax({
+
+        url: "../ajax/abono.ajax.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+
+        success: function(datos){
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, "800");
+        }
+
+    });
+
+}
     
 //FUNCION PARA MOSTRAR LA DEDUA ACTUAL DEL EMPLEADO SEGUN EL EMPLEADO QUE SE ELIJA
 function mostrar(idempleado){
@@ -442,6 +477,17 @@ function mostrar(idempleado){
 		data = JSON.parse(data);	
 		$("#idempleado").val(data.idempleado);
         $("#deuda").val(data.debe);
+
+ 	})
+}
+
+function mostrarDeudaAbono(idempleadoAbono){
+
+    $.post("../ajax/nomina.ajax.php?op=mostrar",{idempleado:idempleadoAbono}, function(data, status){
+
+		data = JSON.parse(data);	
+		$("#idempleadoAbono").val(data.idempleado);
+        $("#deudaAbono").val(data.debe);
 
  	})
 }
@@ -532,6 +578,233 @@ function guardarPrenomina(e){
                 window.location.reload();
             }, "800");
         }, "1500");
+
+}
+
+/******************************************************************************
+                       FUNCIONES DE ELIMINAR 
+*******************************************************************************/
+function eliminarNomina(idabononomina){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/nomina.ajax.php?op=eliminar", {idabononomina : idabononomina}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+      })
+
+}
+
+function eliminarPrestamo(idprestamo){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/prestamo.ajax.php?op=eliminar", {idprestamo : idprestamo}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+      })
+
+}
+
+function eliminarAbono(idabono){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/abono.ajax.php?op=eliminar", {idabono : idabono}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+      })
+
+}
+
+function eliminarProveedor(idpagoproveedor){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/pagoproveedor.ajax.php?op=eliminar", {idpagoproveedor : idpagoproveedor}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+    })
+
+}
+
+function eliminarGasto(idgasto){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/gasto.ajax.php?op=eliminar", {idgasto : idgasto}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+      })
+
+}
+
+function eliminarDeposito(iddeposito){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/deposito.ajax.php?op=eliminar", {iddeposito : iddeposito}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+      })
+
+}
+
+function eliminarLiquidacion(idliquidacion){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/liquidacion.ajax.php?op=eliminar", {idliquidacion : idliquidacion}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+      })
+
+}
+
+function eliminarNota(idnota){
+
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../ajax/registro_notas.ajax.php?op=eliminar", {idnota : idnota}, function(e){
+
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
+                  window.location.reload();
+
+            });
+          
+        }
+      })
 
 }
 

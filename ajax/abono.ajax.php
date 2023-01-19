@@ -6,12 +6,10 @@ $abono = new Abono();
 
 $idabono = isset($_POST["idabono"])? limpiarCadena($_POST["idabono"]) : "";
 $fecha = isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]) : "";
-$idusuario = isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]) : "";
 $idempleado = isset($_POST["idempleado"])? limpiarCadena($_POST["idempleado"]) : "";
-$observacion = isset($_POST["observacion"])? limpiarCadena($_POST["observacion"]) : "";
-$tipo = isset($_POST["tipo"])? limpiarCadena($_POST["tipo"]) : "";
+$tipo = "ABONO VOLUNTARIO";
 $importe = isset($_POST["importe"])? limpiarCadena($_POST["importe"]) : "";
-
+$idusuario = isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]) : "";
 $idabononomina = $idempleado."-".substr(md5(time()), 0, 16);;
 
 switch ($_GET["op"]){
@@ -25,7 +23,7 @@ switch ($_GET["op"]){
 
         }else{
 
-            $rspta = $abono->editar($idabono, $fecha, $idempleado, $tipo, $importe, $idusuario);
+            $rspta = $abono->editar($fecha, $idempleado, $tipo, $importe, $idusuario, $idabononomina);
             echo $rspta ? "El abono se ha modificado correctamente" : "El abono no se pudo modificar";
 
         }
@@ -48,8 +46,7 @@ switch ($_GET["op"]){
 
         while ($reg=$rspta->fetch_object()){
             $data[] = array(
-                            "0" =>'<a href="vale.php?idabono='.$reg->idabono.'"><button class="btn btn-primary btn-sm"><i class="fa fa-print" aria-hidden="true"></i></button></a>
-                                    <button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idabono.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
+                            "0" =>'<button class="btn btn-danger btn-sm" onclick="eliminar('.$reg->idabono.')"><i class="fa fa-times" aria-hidden="true"></i></button>',
                             "1" => $reg->fecha,
                             "2" => $reg->nombre,
                             "3" => $reg->tipo,

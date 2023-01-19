@@ -19,7 +19,7 @@ $caja_ahorro = isset($_POST["caja_ahorro"])? limpiarCadena($_POST["caja_ahorro"]
 $idusuario = isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]) : "";
 $idsucursal = isset($_POST["idsucursal"])? limpiarCadena($_POST["idsucursal"]) : "";
 $t_general = isset($_POST["t_general"])? limpiarCadena($_POST["t_general"]) : "";
-$tipo_abono = "ABONO A PRESTAMO";
+$tipo_abono = "ABONO DE NOMINA";
 $tipo_ac = "LIQ. ADELANTO DE NOMINA";
 $idabononomina = isset($_POST["idabononomina"])? limpiarCadena($_POST["idabononomina"]) : "";
 

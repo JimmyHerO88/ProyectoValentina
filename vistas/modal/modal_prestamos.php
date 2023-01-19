@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form role="form" method="post" enctype="multipart/form-data" id="modal_prestamos" name="modal_prestamos">
                 <div class="modal-header" style="background-color: #ffc107">
-                    <h4 class="modal-title">Ingresar o actualizar Préstamos</h4>
+                    <h4 class="modal-title">Préstamos</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>

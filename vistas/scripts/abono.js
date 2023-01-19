@@ -114,13 +114,18 @@ function guardaryeditar(e){
         processData: false,
 
         success: function(datos){
-            bootbox.alert(datos);
+            Swal.fire({
+                icon: 'success',
+                title: datos,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             mostrarform(false);
             tabla.ajax.reload();
         }
 
     });
-
     limpiar();
 
 }
@@ -145,23 +150,46 @@ function mostrar(idabono){
     })
 }
 
+//FUNCION MOSTRAR
+function mostrardeuda(idempleado){
+
+    $.post("../ajax/nomina.ajax.php?op=mostrar",{idempleado:idempleado}, function(data, status){
+
+		data = JSON.parse(data);		
+		mostrarform(true);
+
+		$("#idempleado").val(data.idempleado);
+        $("#deuda").val(data.debe);
+
+ 	})
+}
+
 //FUNCION DESACTIVAR
 function eliminar(idabono){
 
-    bootbox.confirm("¿Está seguro de eliminar este abono?",function(result){
-      
-        if(result){
-
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Los registros eliminados ya no se podran recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'btn btn-success',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar registro'
+      }).then((result) => {
+        if (result.isConfirmed) {
             $.post("../ajax/abono.ajax.php?op=eliminar", {idabono : idabono}, function(e){
 
-                bootbox.alert(e);
+                Swal.fire(
+                    '¡Registro Eliminado!',
+                    'EL registro se ha eliminado con éxito.',
+                    'success'
+                  )
                 tabla.ajax.reload();
 
             });
-
+          
         }
-
-    })
+      })
 
 }
 

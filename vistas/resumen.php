@@ -20,12 +20,12 @@ if(!isset($_SESSION["nombre"])){
       $filtro = date("Y-m-d"); 
     }
 
-    $sql = "SELECT nombre, tipo, importe FROM prestamo INNER JOIN empleado on prestamo.idempleado = empleado.idempleado WHERE fecha = '".$filtro."' ORDER BY tipo";
+    $sql = "SELECT idprestamo, nombre, tipo, importe FROM prestamo INNER JOIN empleado on prestamo.idempleado = empleado.idempleado WHERE fecha = '".$filtro."' ORDER BY tipo";
               $sentencia = $pdo->prepare($sql);
               $sentencia->execute();
               $g_nomina = $sentencia->fetchAll();
 
-    $sql200 = "SELECT nombre, t_general FROM nomina INNER JOIN empleado on nomina.idempleado = empleado.idempleado WHERE fecha = '".$filtro."' ORDER BY nombre";
+    $sql200 = "SELECT nombre, t_general, idabononomina FROM nomina INNER JOIN empleado on nomina.idempleado = empleado.idempleado WHERE fecha = '".$filtro."' ORDER BY nombre";
               $sentencia200 = $pdo->prepare($sql200);
               $sentencia200->execute();
               $prenomina = $sentencia200->fetchAll();
@@ -50,11 +50,25 @@ if(!isset($_SESSION["nombre"])){
               $sentencia5->execute();
               $liquidaciones = $sentencia5->fetchAll(); 
 
+      $sql200 = "SELECT a.idabono, a.tipo, e.nombre, a.importe FROM `abono` a INNER JOIN empleado e ON a.idempleado = e.idempleado WHERE tipo = 'ABONO VOLUNTARIO' ORDER BY e.nombre";
+              $sentencia200 = $pdo->prepare($sql200);
+              $sentencia200->execute();
+              $abonos = $sentencia200->fetchAll();
+
+      $sql210 = "SELECT SUM(importe) FROM abono WHERE tipo = 'ABONO VOLUNTARIO' AND fecha = '".$filtro."'";
+              $sentencia210 = $pdo->prepare($sql210);
+              $sentencia210->execute();
+              $total_abono = $sentencia210->fetch(); 
+              if(empty($total_abono[0])){
+                $t_abonos = 0;
+              }else{
+                $t_abonos = $total_abono[0];
+              }
+
       $sql6 = "SELECT SUM(importe) FROM prestamo WHERE fecha = '".$filtro."'";
               $sentencia6 = $pdo->prepare($sql6);
               $sentencia6->execute();
               $total_prestamo = $sentencia6->fetch(); 
-              $t_prestamos = $total_prestamo[0];
               if(empty($total_prestamo[0])){
                 $t_prestamos = 0;
               }else{
@@ -65,7 +79,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia7 = $pdo->prepare($sql7);
               $sentencia7->execute();
               $total_proveedores = $sentencia7->fetch(); 
-              $t_proveedores = $total_proveedores[0];
               if(empty($total_proveedores[0])){
                 $t_proveedores = 0;
               }else{
@@ -97,7 +110,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia10 = $pdo->prepare($sql10);
               $sentencia10->execute();
               $total_liq = $sentencia10->fetch(); 
-              $t_liquidaciones = $total_liq[0];
               if(empty($total_liq[0])){
                 $t_liquidaciones = 0;
               }else{
@@ -133,7 +145,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia60 = $pdo->prepare($sql60);
               $sentencia60->execute();
               $total_foraneas = $sentencia60->fetch(); 
-              $t_foraneas = $total_foraneas[0];
               if(empty($total_foraneas[0])){
                 $t_foraneas = 0;
               }else{
@@ -144,7 +155,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia70 = $pdo->prepare($sql70);
               $sentencia70->execute();
               $total_remisiones = $sentencia70->fetch(); 
-              $t_remisiones = $total_remisiones[0];
               if(empty($total_remisiones[0])){
                 $t_remisiones = 0;
               }else{
@@ -154,8 +164,7 @@ if(!isset($_SESSION["nombre"])){
       $sql80 = "SELECT SUM(total) FROM registro_notas WHERE concepto = 'NOTAS PEDIDOS' AND fecha = '".$filtro."'";
               $sentencia80 = $pdo->prepare($sql80);
               $sentencia80->execute();
-              $total_pedidos = $sentencia80->fetch(); 
-              $t_pedidos = $total_pedidos[0];
+              $total_pedidos = $sentencia80->fetch();
               if(empty($total_pedidos[0])){
                 $t_pedidos = 0;
               }else{
@@ -167,7 +176,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia90 = $pdo->prepare($sql90);
               $sentencia90->execute();
               $total_TCF = $sentencia90->fetch(); 
-              $tickets_f = $total_TCF[0];
               if(empty($total_TCF[0])){
                 $tickets_f = 0;
               }else{
@@ -178,7 +186,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia100 = $pdo->prepare($sql100);
               $sentencia100->execute();
               $total_TCR = $sentencia100->fetch(); 
-              $tickets_r = $total_TCR[0];
               if(empty($total_TCR[0])){
                 $tickets_r = 0;
               }else{
@@ -189,7 +196,6 @@ if(!isset($_SESSION["nombre"])){
                 $sentencia110 = $pdo->prepare($sql110);
                 $sentencia110->execute();
                 $total_liq = $sentencia110->fetch(); 
-                $t_liquidaciones = $total_liq[0];
                 if(empty($total_liq[0])){
                   $t_liquidaciones = 0;
                 }else{
@@ -200,7 +206,6 @@ if(!isset($_SESSION["nombre"])){
               $sentencia120 = $pdo->prepare($sql120);
               $sentencia120->execute();
               $total_venta = $sentencia120->fetch(); 
-              $total_notas = $total_venta[0];
               if(empty($total_venta[0])){
                 $total_notas = 0;
               }else{
@@ -221,7 +226,6 @@ if(!isset($_SESSION["nombre"])){
                 $sentencia140 = $pdo->prepare($sql140);
                 $sentencia140->execute();
                 $total_depos = $sentencia140->fetch(); 
-                $t_depositos = $total_depos[0];
                 if(empty($total_depos[0])){
                   $t_depositos = 0;
                 }else{
@@ -232,7 +236,6 @@ if(!isset($_SESSION["nombre"])){
                 $sentencia150 = $pdo->prepare($sql150);
                 $sentencia150->execute();
                 $total_tarjeta = $sentencia150->fetch(); 
-                $t_tarjeta = $total_tarjeta[0];
                 if(empty($total_tarjeta[0])){
                   $t_tarjeta = 0;
                 }else{
@@ -243,7 +246,6 @@ if(!isset($_SESSION["nombre"])){
                 $sentencia160 = $pdo->prepare($sql160);
                 $sentencia160->execute();
                 $total_transf = $sentencia160->fetch(); 
-                $t_transferencias = $total_transf[0];
                 if(empty($total_transf[0])){
                   $t_transferencias = 0;
                 }else{
@@ -254,7 +256,6 @@ if(!isset($_SESSION["nombre"])){
                 $sentencia170 = $pdo->prepare($sql170);
                 $sentencia170->execute();
                 $total_factura = $sentencia170->fetch(); 
-                $t_facturas = $total_factura[0];
                 if(empty($total_factura[0])){
                 $t_facturas = 0;
               }else{
@@ -280,11 +281,20 @@ if(!isset($_SESSION["nombre"])){
     $TotalGastosNomina = $t_nomina + $t_prestamos;
     $TotalGastos = $t_gastos_tienda + $t_gastos_personales;
     $TotalGastosGeneral = $t_gastos_tienda + $t_gastos_personales + $TotalGastosNomina;
-    $Total_VENTA = $total_notas + $t_liquidaciones;
+    $Total_VENTA = $total_notas + $t_liquidaciones + $t_abonos;
     $Diferencia = $TotalGastosGeneral + $TOTAL_DEPOSITOS - $Total_VENTA;
+    $TotalLiquidaciones = $t_liquidaciones + $t_abonos;
 
 ?>
 <!--Contenido-->
+<style type="text/css" media="print">
+  @media print {
+  .btn-eliminar,
+  .btn-eliminar * {
+    display: none !important;
+  }
+}
+</style>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper" id="content-wrapper">        
         <!-- Main content -->
@@ -331,12 +341,18 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;">Nómina de <?php echo $nomina_personal['nombre'];?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($nomina_personal['t_general'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarNomina(<?php echo $nomina_personal['idabononomina'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>  
                         <?php foreach($g_nomina as $prestamos): ?>
                             <tr>
                               <td style="font-size: 20px;"><?php echo ucfirst(strtolower($prestamos['tipo']));?> <?php echo $prestamos['nombre'];?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($prestamos['importe'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarPrestamo(<?php echo $prestamos['idprestamo'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>     
                         </tbody>
@@ -350,7 +366,10 @@ if(!isset($_SESSION["nombre"])){
                         <?php foreach($g_prov as $prov): ?>
                             <tr>
                               <td style="font-size: 20px;"><?php echo substr(ucfirst(strtolower($prov['concepto'])),0,40);?></td>
-                              <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($prov['importe'],2);?></td>
+                              <td style="font-size: 20px;">$ <?php echo number_format($prov['importe'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarProveedor(<?php echo $prov['idpagoproveedor'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>
                         </tbody>
@@ -367,6 +386,9 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;"><?php echo substr(ucfirst(strtolower($tienda['concepto'])),0,40);?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($tienda['importe'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarGasto(<?php echo $tienda['idgasto'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>
                         </tbody>
@@ -379,6 +401,9 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;"><?php echo substr(ucfirst(strtolower($personal['concepto'])),0,40);?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($personal['importe'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarGasto(<?php echo $personal['idgasto'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>
                         </tbody>
@@ -392,7 +417,10 @@ if(!isset($_SESSION["nombre"])){
                         <?php foreach($listado_depos as $depos): ?>
                             <tr>
                               <td style="font-size: 20px;"><?php echo ($depos['tipo']);?> <?php echo ($depos['concepto']);?></td>
-                              <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($depos['importe'],2);?></td>
+                              <td style="font-size: 20px; ">$ <?php echo number_format($depos['importe'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarDeposito(<?php echo $depos['iddeposito'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>
                         </tbody>
@@ -405,11 +433,23 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;"><?php echo substr(ucfirst(strtolower($liq['concepto'])),0,40);?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($liq['importe'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarLiquidacion(<?php echo $liq['idliquidacion'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
+                            </tr>
+                        <?php endforeach?>
+                        <?php foreach($abonos as $abonoV): ?>
+                            <tr>
+                              <td style="font-size: 20px;"><?php echo $abonoV['tipo'];?> DE <?php echo $abonoV['nombre'];?></td>
+                              <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($abonoV['importe'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarAbono(<?php echo $abonoV['idabono'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>
                         </tbody>
                       </table>
-                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_liquidaciones,2);?></strong></p>
+                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($TotalLiquidaciones,2);?></strong></p>
                     </div>
                   </div>     
                 </div>
@@ -423,7 +463,8 @@ if(!isset($_SESSION["nombre"])){
                         <th style="font-size: 20px;">Importe</th>
                         <th style="font-size: 20px;">Cliente</th>
                         <th style="font-size: 20px;">Tipo Pago</th>                                      
-                        <th style="font-size: 20px;">Observaciones</th>
+                        <th style="font-size: 20px;">Observaciones</th>                                     
+                        <th style="font-size: 20px;"></th>
                       </thead>
                       <tbody>
                       <?php foreach($n_foraneas as $foraneas): ?>
@@ -433,6 +474,9 @@ if(!isset($_SESSION["nombre"])){
                             <td style="font-size: 20px;"><?php echo substr(ucfirst(strtolower($foraneas['cliente'])),0,50);?></td>
                             <td style="font-size: 20px;"><?php echo ucfirst(strtolower($foraneas['tipo_pago']));?></td>
                             <td style="font-size: 20px;"><?php echo ucfirst(strtolower($foraneas['observaciones']));?></td>
+                            <td class="btn-eliminar">
+                              <button class="btn btn-danger btn-sm" onclick="eliminarNota(<?php echo $foraneas['idnota'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            </td>
                           </tr>
                       <?php endforeach?>     
                       </tbody>
@@ -451,6 +495,9 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;"><?php echo $remisiones['rango_folios'];?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($remisiones['total'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarNota(<?php echo $remisiones['idnota'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>     
                         </tbody>
@@ -468,6 +515,9 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;"><?php echo $pedidos['rango_folios'];?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($pedidos['total'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarNota(<?php echo $pedidos['idnota'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>     
                         </tbody>
@@ -487,6 +537,9 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;"><?php echo $tc_r['rango_folios'];?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($tc_r['total'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarNota(<?php echo $tc_r['idnota'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>     
                         </tbody>
@@ -504,6 +557,9 @@ if(!isset($_SESSION["nombre"])){
                             <tr>
                               <td style="font-size: 20px;"><?php echo $tc_f['rango_folios'];?></td>
                               <td style="font-size: 20px; text-align: rigth;">$ <?php echo number_format($tc_f['total'],2);?></td>
+                              <td class="btn-eliminar">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarNota(<?php echo $tc_f['idnota'];?>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </td>
                             </tr>
                         <?php endforeach?>     
                         </tbody>
@@ -511,7 +567,7 @@ if(!isset($_SESSION["nombre"])){
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <h5  style="border-style: solid; border-width: 3px;"><strong>LIQUIDACIONES $ <?php echo number_format($t_liquidaciones,2);?></strong></h5>
+                    <h5  style="border-style: solid; border-width: 3px;"><strong>LIQUIDACIONES $ <?php echo number_format($TotalLiquidaciones,2);?></strong></h5>
                     <p style="font-size: 40px"><strong>
                       ****************************************************************<br>
                     Venta Real: $ <?php echo number_format($Total_VENTA,2);?><br>
@@ -552,6 +608,7 @@ if(!isset($_SESSION["nombre"])){
         require 'modal/modal_registro_notas.php';
         require 'modal/modal_liquidaciones.php';
         require 'modal/modal_prestamos.php';
+        require 'modal/modal_abonos.php';
         require 'modal/modal_prenomina.php';
       ?>
 
