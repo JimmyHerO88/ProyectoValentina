@@ -28,7 +28,7 @@ switch ($_GET["op"]){
                $_FILES['imagen']['type']=="image/jpeg"|| 
                $_FILES['imagen']['type']=="image/png"){
 
-                $imagen = 'vistas/img/usuarios/'.$_POST["nombre"].round(microtime(true)). '.' . end($ext);
+                $imagen = 'vistas/img/usuarios/'.$_POST["login"].round(microtime(true)). '.' . end($ext);
                 move_uploaded_file($_FILES['imagen']['tmp_name'],"../".$imagen);
             }
 
