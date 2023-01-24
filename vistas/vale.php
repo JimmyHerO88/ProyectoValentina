@@ -182,7 +182,7 @@ if(!isset($_SESSION["nombre"])){
         <div class="col-12">
             <h1 class="text-center" style="font-size: 200px;"><strong>Creaciones Valentina</strong></h1>
             <h2 class="text-center" style="font-size: 150px;"><u>Vale de Nómina</u></h2>
-            <h3 class="text-center" style="font-size: 150px;">Fecha: <strong><?php echo $nomina['tipo'];?></strong></h3>
+            <h3 class="text-center" style="font-size: 150px;">Fecha: <strong><?php echo $nomina['fecha'];?></strong></h3>
             <p class="text-center" style="font-size: 80px;">***********************************************************</p>
             <h4 class="text-center" style="font-size: 150px;"><strong>Deuda acumulada: $ <?php echo $total_deuda['debe'];?> </strong></h4>
             <p class="text-center" style="font-size: 80px;">***********************************************************</p>

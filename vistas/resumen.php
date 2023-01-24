@@ -50,7 +50,7 @@ if(!isset($_SESSION["nombre"])){
               $sentencia5->execute();
               $liquidaciones = $sentencia5->fetchAll(); 
 
-      $sql200 = "SELECT a.idabono, a.tipo, e.nombre, a.importe FROM `abono` a INNER JOIN empleado e ON a.idempleado = e.idempleado WHERE tipo = 'ABONO VOLUNTARIO' ORDER BY e.nombre";
+      $sql200 = "SELECT a.idabono, a.tipo, e.nombre, a.importe FROM `abono` a INNER JOIN empleado e ON a.idempleado = e.idempleado WHERE tipo = 'ABONO VOLUNTARIO' AND fecha = '".$filtro."' ORDER BY e.nombre";
               $sentencia200 = $pdo->prepare($sql200);
               $sentencia200->execute();
               $abonos = $sentencia200->fetchAll();
@@ -280,7 +280,7 @@ if(!isset($_SESSION["nombre"])){
 
     $TotalGastosNomina = $t_nomina + $t_prestamos;
     $TotalGastos = $t_gastos_tienda + $t_gastos_personales;
-    $TotalGastosGeneral = $t_gastos_tienda + $t_gastos_personales + $TotalGastosNomina;
+    $TotalGastosGeneral = $t_gastos_tienda + $t_gastos_personales + $TotalGastosNomina + $t_proveedores;
     $Total_VENTA = $total_notas + $t_liquidaciones + $t_abonos;
     $Diferencia = $TotalGastosGeneral + $TOTAL_DEPOSITOS - $Total_VENTA;
     $TotalLiquidaciones = $t_liquidaciones + $t_abonos;
@@ -407,8 +407,8 @@ if(!isset($_SESSION["nombre"])){
                             </tr>
                         <?php endforeach?>
                         </tbody>
-                      </table>
-                      <p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($TotalGastos,2);?></strong></p>
+                      </table><p class="text-center" style="font-size: 25px;"><strong>Total: $ <?php echo number_format($t_gastos_personales,2);?></strong></p> <br>
+                      <p class="text-center" style="font-size: 25px;"><strong>Total General de Gastos: $ <?php echo number_format($TotalGastos,2);?></strong></p>
                     </div>
                     <div class="col-6" style="border-top: 5px solid; padding-top: 15px;">
                       <h5 style="border-style: solid; border-width: 3px;" class="text-center"><strong>DEPÓSITOS</strong></h5>
