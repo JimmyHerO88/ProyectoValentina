@@ -37,6 +37,7 @@
                             <th>Ventas</th>
                             <th>T_Perdido</th>
                             <th>Abono</th>
+                            <th>Adelanto</th>
                             <th>T_General</th>
                           </thead>
 
@@ -53,6 +54,7 @@
                             <th>Ventas</th>
                             <th>T_Perdido</th>
                             <th>Abono</th>
+                            <th>Adelanto</th>
                             <th>T_General</th>
                           </tfoot>
                         </table>

@@ -20,7 +20,7 @@ if(!isset($_SESSION["nombre"])){
       $filtro = date("Y-m-d"); 
     }
 
-    $sql = "SELECT `idnomina`,`fecha`,`nombre`,`dias`,`t_extra`,`ventas`,`t_perdido`,`abono`,`t_general`, `idabononomina`
+    $sql = "SELECT `idnomina`,`fecha`,`nombre`,`dias`,`t_extra`,`ventas`,`t_perdido`,`a_cuenta`,`abono`,`t_general`, `idabononomina`
     FROM nomina INNER JOIN empleado ON nomina.idempleado = empleado.idempleado
     WHERE fecha = '".$filtro."' 
     ORDER BY nombre ";
@@ -58,6 +58,12 @@ if(!isset($_SESSION["nombre"])){
     $sentencia7->execute();
     $abono = $sentencia7->fetch(); 
     $t_abono = $abono[0];
+
+    $sql8 = "SELECT SUM(a_cuenta) FROM nomina WHERE fecha = '".$filtro."' ";
+    $sentencia8 = $pdo->prepare($sql8);
+    $sentencia8->execute();
+    $a_cuenta = $sentencia8->fetch(); 
+    $t_a_cuenta = $a_cuenta[0];
 
     $sql9 = "SELECT SUM(t_general) FROM nomina WHERE fecha = '".$filtro."' ";
     $sentencia9 = $pdo->prepare($sql9);
@@ -111,6 +117,7 @@ if(!isset($_SESSION["nombre"])){
                                     <th style="font-size: 18px;" scope="col">Ventas</th>
                                     <th style="font-size: 18px;" scope="col">T_perdido</th>
                                     <th style="font-size: 18px;" scope="col">Abonos</th>
+                                    <th style="font-size: 18px;" scope="col">Adelantos</th>
                                     <th style="font-size: 18px;" scope="col">Total</th>
                                   </tr>
                                 </thead>
@@ -123,6 +130,7 @@ if(!isset($_SESSION["nombre"])){
                                       <td style="font-size: 18px; ">$ <?php echo number_format($nomina_ind['ventas'],2);?></td>
                                       <td style="font-size: 18px; ">$ <?php echo number_format($nomina_ind['t_perdido'],2);?></td>
                                       <td style="font-size: 18px; ">$ <?php echo number_format($nomina_ind['abono'],2);?></td>
+                                      <td style="font-size: 18px; ">$ <?php echo number_format($nomina_ind['a_cuenta'],2);?></td>
                                       <td style="font-size: 18px; ">$ <?php echo number_format($nomina_ind['t_general'],2);?></td>
                                     </tr>
                                   <?php endforeach?>
@@ -134,6 +142,7 @@ if(!isset($_SESSION["nombre"])){
                                   <th style="font-size: 18px;">$ <?php echo number_format($t_ventas,2);?></th>
                                   <th style="font-size: 18px;">$ <?php echo number_format($t_perdido,2);?></th>
                                   <th style="font-size: 18px;">$ <?php echo number_format($t_abono,2);?></th>
+                                  <th style="font-size: 18px;">$ <?php echo number_format($t_a_cuenta,2);?></th>
                                   <th style="font-size: 18px;">$ <?php echo number_format($t_t_general,2);?></th>
                                 </tfoot>
                               </table>

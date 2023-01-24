@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal-prenomina">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form role="form" method="post" enctype="multipart/form-data" id="modal_prenomina" oninput="t_general.value=parseFloat(sueldo_dia.value)*parseFloat(dias.value)+parseFloat(t_extra.value)+parseFloat(ventas.value)-parseFloat(t_perdido.value)-parseFloat(abono.value)">
+            <form role="form" method="post" enctype="multipart/form-data" id="modal_prenomina" oninput="t_general.value=parseFloat(sueldo_dia.value)*parseFloat(dias.value)+parseFloat(t_extra.value)+parseFloat(ventas.value)-parseFloat(t_perdido.value)-parseFloat(abono.value)-parseFloat(a_cuenta.value)">
                 <div class="modal-header" style="background-color: #ffc107">
                     <h4 class="modal-title">Prenómina</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -81,8 +81,17 @@
                                     </div>
                                     <input type="number" step="0.01" class="form-control input-md" name="abono" id="abono" placeholder="Abono a deuda" required>
                                 </div>
-                            </div>
+                            </div>    
                             <div class="form-group col-6">
+                                <label>Adelanto de nómina</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" step="0.01" class="form-control input-md" name="a_cuenta" id="a_cuenta" placeholder="Adelanto de nómina" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
                                 <label>Tiempo Perdido</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">

@@ -44,6 +44,7 @@ const tiempoExtra = document.getElementById('t_extra');
 const ventas = document.getElementById('ventas');
 const deuda = document.getElementById('deudaNomina');
 const abono = document.getElementById('abono');
+const a_cuenta = document.getElementById('a_cuenta');
 const tiempoPerdido = document.getElementById('t_perdido');
 const total = document.getElementById('t_general');
 
@@ -520,7 +521,7 @@ function guardarPrenomina(e){
     $("#btnGuardarNomina").prop("disabled", true);
     let formData = new FormData($("#modal_prenomina")[0]);
     let empleadoElegido = indexEmpleadoNomina.options[indexEmpleadoNomina.selectedIndex].text;
-    let deudaAcutal = parseFloat(deuda.value) - parseFloat(abono.value);
+    let deudaAcutal = parseFloat(deuda.value) - parseFloat(abono.value) - parseFloat(a_cuenta.value);
 
     $.ajax({
 
@@ -552,6 +553,7 @@ function guardarPrenomina(e){
               <p class="text-right" style="font-size: 120px;">Tiempo Extra</p>
               <p class="text-right" style="font-size: 120px;">Ventas</p>
               <p class="text-right" style="font-size: 120px;">Abono a Deuda</p>
+              <p class="text-right" style="font-size: 120px;">Adelanto Nómina</p>
               <p class="text-right" style="font-size: 120px;">Tiempo Perdido</p>
             </div>
             <div class="col-6">
@@ -559,6 +561,7 @@ function guardarPrenomina(e){
               <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(tiempoExtra.value)}</p>
               <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(ventas.value)}</p>
               <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(abono.value)}</p>
+              <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(a_cuenta.value)}</p>
               <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ ${formatoMexico(tiempoPerdido.value)}</p>
             </div>
             <div class="col-12">

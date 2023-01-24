@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Ingresar o actualizar Depósitos</h3>
                     </div>
-                    <form name="formulario" id="formulario" method="POST" oninput="t_general.value=parseFloat(sueldo_dia.value)*parseFloat(dias.value)+parseFloat(t_extra.value)+parseFloat(ventas.value)-parseFloat(t_perdido.value)-parseFloat(abono.value)">
+                    <form name="formulario" id="formulario" method="POST" oninput="t_general.value=parseFloat(sueldo_dia.value)*parseFloat(dias.value)+parseFloat(t_extra.value)+parseFloat(ventas.value)-parseFloat(t_perdido.value)-parseFloat(abono.value)-parseFloat(a_cuenta.value)">
 
                         <div class="card-body">
                             <div class="form-group">
@@ -82,8 +82,17 @@
                                         </div>
                                         <input type="number" step="0.01" class="form-control input-md" name="abono" id="abono" placeholder="Abono a deuda" value="0.00" required>
                                     </div>
-                                </div>
+                                </div>    
                                 <div class="form-group col-6">
+                                    <label>Adelanto de nómina</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                        </div>
+                                        <input type="number" step="0.01" class="form-control input-md" name="a_cuenta" id="a_cuenta" placeholder="Adelanto de nómina" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
                                     <label>Tiempo Perdido</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">

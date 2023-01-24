@@ -195,6 +195,7 @@ if(!isset($_SESSION["nombre"])){
                 <p class="text-right" style="font-size: 120px;">Tiempo Extra</p>
                 <p class="text-right" style="font-size: 120px;">Ventas</p>
                 <p class="text-right" style="font-size: 120px;">Abono a Deuda</p>
+                <p class="text-right" style="font-size: 120px;">Adelanto Nómina</p>
                 <p class="text-right" style="font-size: 120px;">Tiempo Perdido</p>
                 </div>
                 <div class="col-6">
@@ -202,6 +203,7 @@ if(!isset($_SESSION["nombre"])){
                 <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ <?php echo $nomina['t_extra'];?></p>
                 <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ <?php echo $nomina['ventas'];?></p>
                 <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ <?php echo $nomina['abono'];?></p>
+                <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ <?php echo $nomina['a_cuenta'];?></p>
                 <p class="text-left" style="font-size: 120px; padding-left: 100px;">$ <?php echo $nomina['t_perdido'];?></p>
                 </div>
                 <div class="col-12">

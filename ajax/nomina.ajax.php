@@ -23,6 +23,7 @@ $tipo_abono = "ABONO DE NOMINA";
 $tipo_ac = "LIQ. ADELANTO DE NOMINA";
 $idabononomina = isset($_POST["idabononomina"])? limpiarCadena($_POST["idabononomina"]) : "";
 
+
 switch ($_GET["op"]){
     
     case 'guardaryeditar':
@@ -34,6 +35,12 @@ switch ($_GET["op"]){
             $abonos = new Abono();
             $rspta= $abonos->insertar($fecha, $idempleado, $tipo_abono, $abono, $idusuario, $idabononomina_1);
         } 
+
+        if(!empty($a_cuenta)){
+            require_once "../modelos/Abono.php";
+            $abonos = new Abono();
+            $rspta= $abonos->insertar($fecha, $idempleado, $tipo_ac, $a_cuenta, $idusuario, $idabononomina_1);
+        }
         
         $rspta=$nomina->insertar($fecha, $idempleado, $dias, $t_extra, $ventas, $t_perdido, $a_cuenta, $abono, $mercancia, $caja_ahorro, $t_general, $idusuario, $idsucursal, $idabononomina_1);
         echo $rspta ? "Nómina registrada" : "No se pudieron registrar todos los datos de la nómina";
@@ -59,7 +66,8 @@ switch ($_GET["op"]){
                             "5" => $reg->ventas,
 							"6" => $reg->t_perdido,
                             "7" => $reg->abono,
-							"8" => $reg->t_general
+                            "8" => $reg->a_cuenta,
+							"9" => $reg->t_general
                             );
         }
         $results = array(

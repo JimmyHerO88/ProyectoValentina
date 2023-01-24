@@ -31,6 +31,7 @@ function limpiar(){
 	$("#t_perdido").val("");
 	$("#deuda").val("");
 	$("#abono").val("");
+	$("#a_cuenta").val("");
 	$("#idsucursal").val("");
 	$("#idusuario").val("");
 	$("#t_general").val("");

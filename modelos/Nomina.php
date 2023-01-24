@@ -22,7 +22,7 @@ Class Nomina{
     //Metodo para LISTAR TODOS LOS registros
     public function listar()
 	{
-		$sql = "SELECT `idnomina`,`fecha`,`nombre`,`dias`,`t_extra`,`ventas`,`t_perdido`,`abono`,`t_general`, `idabononomina`
+		$sql = "SELECT `idnomina`,`fecha`,`nombre`,`dias`,`t_extra`,`ventas`,`t_perdido`,`a_cuenta`,`abono`,`t_general`, `idabononomina`
         FROM nomina INNER JOIN empleado ON nomina.idempleado = empleado.idempleado
         ORDER BY nombre";
         
